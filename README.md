@@ -21,8 +21,8 @@ and the second one is the number (min = 1, max = 15) of items to display.
 ## Install 
 You will need a Node JS environment 
 
-npm install discord.js --save 
-npm install steem --save 
+- npm install discord.js --save 
+- npm install steem --save 
 
 ## Configuration
 
