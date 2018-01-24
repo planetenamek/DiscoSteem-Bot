@@ -28,8 +28,7 @@ bot.on("message", async message => {
                 message.channel.send(messageBalance + " " + result[0]["balance"] + "**")
             }else {
                 message.channel.send("User not found !")
-            }
-                
+            }      
         });            
     }
 
@@ -107,7 +106,6 @@ bot.on("message", async message => {
         limit = parseInt(limit)
 
         if(message.member.permissions.has("ADMINISTRATOR") || message.member.permissions.has("MANAGE_CHANNELS") ){
-            
             if(limit > 0 && limit <= 15) {    
                 steem.api.getDiscussionsByCreated({"tag": tag[0], "limit": limit}, function(err, result) {
                     if(result){
@@ -157,11 +155,9 @@ bot.on("message", async message => {
     }
 
     if(command === "price"){
-
         steem.api.getOrderBook(1, function(err, result) {
             asks = parseFloat(result["asks"][0]["real_price"]).toFixed(5)
             bids = parseFloat(result["bids"][0]["real_price"]).toFixed(5)
-
             message.channel.send("From **1 SBD** in internal market : **Asks** =  **" + asks + "** STEEM **Bids** = **" + bids + "** STEEM" );
           });
     }
