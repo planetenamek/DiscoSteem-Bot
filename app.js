@@ -176,7 +176,7 @@ bot.on("message", async message => {
         "**$bal-steem** followed by the steemit username of your choice to display its **Steem balance.** \n \n" + 
         "**$bal-sbd** followed by the steemit username of your choice to display its **SBD balance.**  \n \n" + 
         "**$bal-sp** followed by the steemit username of your choice to display its **Steem Power balance.**  \n \n" + 
-        "**$last payout** displays the pending payment of the last article of the author of your choice \n \n" +
+        "**$last-payout** displays the pending payment of the last article of the author of your choice \n \n" +
         "**Each command ($...) that requires a parameter must be separated by a space**")
     }
 });
