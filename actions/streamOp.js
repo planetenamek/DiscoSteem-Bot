@@ -26,7 +26,7 @@ exports.stream = function() {
     }			
    }
   }catch(err){
-    bot.channels.get(checkTags.maintenance).send("Error : " + err);
+    bot.channels.get(config.maintenance).send("Error : " + err);
   } 
  });
 }
