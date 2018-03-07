@@ -3,6 +3,6 @@
   "version": "0.1.0",
   "dependencies": {
     "steem": "~0.7",
-    "discord.js": "~11.3"
+    "discord.js": "~8.2"
   }
 }
