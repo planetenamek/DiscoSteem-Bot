@@ -8,17 +8,17 @@ exports.created = function(tag,limit,message) {
     if(result){
      for (i = 0; i < result.length; i++) {
       let author = result[i]["author"],
-          permlink = result[i]["permlink"],
-      message.channel.send("https://busy.org/" + tag + "/@" + author + "/" + permlink)
+          permlink = result[i]["permlink"]
+      message.channel.send("https://busy.org/" + tag + "/@" + author + "/" + permlink);
      }                
     }else{
-      message.channel.send("Command invalid ! Please try again or type $help")
+      return message.channel.send("Command invalid ! Please try again or type $help");
     }  
    });
   }else{
-   return message.channel.send("Sorry the limit from this command is min 1 post and max 10 post ! Try again")
+   return message.channel.send("Sorry the limit from this command is min 1 post and max 10 post ! Try again");
   }
 }else{
- message.channel.send("You are not allowed to perform this action. (Admin or Mod only)");
+ return message.channel.send("You are not allowed to perform this action. (Admin or Mod only)");
 }
 }
