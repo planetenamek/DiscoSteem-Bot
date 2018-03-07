@@ -18,7 +18,7 @@ exports.discussionBFD = function(value,author,limit,message) {
          .setDescription("**pending payout : " + result[0].pending_payout_value + " - Votes : " + result[0].net_votes + "**")
          .setAuthor( result[0].author + " (" + rep + ")")
          .setThumbnail(img[0])
-         .setURL("https://steemit.com" + result[0].url)
+         .setURL("https://busy.org" + result[0].url)
     return message.channel.send({embed});
    }else{
     return message.channel.send("Sorry user not found !");
@@ -34,7 +34,7 @@ exports.discussionBFD = function(value,author,limit,message) {
 
      if (tag.indexOf(tagSearch) !== (-1) ) {
       if(message.member.permissions.has("ADMINISTRATOR") || message.member.permissions.has("MANAGE_CHANNELS") ){
-       message.channel.send("https://steemit.com/" + tag[0] + "/@" + author + "/" + permlink);
+       message.channel.send("https://busy.org/" + tag[0] + "/@" + author + "/" + permlink);
       }else{
        return message.channel.send("Désolé vous n'avez pas accès à cette commande pour le moment.");
       }
