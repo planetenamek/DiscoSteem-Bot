@@ -69,11 +69,11 @@ bot.on("message", async message => {
  if(message.author.bot) return
 
  if(message.content.indexOf(config.prefix) !== 0) return
-
- if(command === "help") {
-  return cmd.help(message);
+ 
+ if(command === "created") {
+  return cmd.getCreatedContent(message);
  }
-
+ 
  if(command === "last-post") {
   return cmd.getLastPost(message);
  }
@@ -84,7 +84,12 @@ bot.on("message", async message => {
 
  if(command === "bal") {
   return cmd.getWallet(message);
- }    
+ }
+
+  if(command === "help") {
+  return cmd.help(message);
+ }
+
 });
 
 bot.login(config.token);
