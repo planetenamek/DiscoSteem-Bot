@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const steem = require("steem");
+const config = require("./config.json");
 
-var  config = require("./config.json");
 var info = require("./info.json");
 
 var getCreated = require("./actions/created.js");
