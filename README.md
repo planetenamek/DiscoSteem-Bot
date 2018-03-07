@@ -18,10 +18,12 @@ and the second one is the number (min = 1, max = 15) of items to display.
 
 You can now display the Steemit articles of your choice directly on your Discord server. Change the settings to suit your needs in the **config.json** file :
 
-**altTags :** Modify the tags according to your needs. You can add or remove them. Do not forget to add each time the identifier of the channel on which you want to retrieve the article.
-**principalTag :** Please retrieve all articles on a specific tag. For example, I use it to filter all articles in the francophone community that are available on the fr tag, you can delete this parameter if you specify at least one altTags.
-**principalChan** Enter here the channel id on which to receive articles that pass on the **principalTag** but not on altTags.
-**maintenance :** Takes as parameter the channel id of your choice. It allows you to recover errors directly on your Discord server. Convenient in case of crash to receive immediate notification. I use it on a private channel so that visitors can't see errors and tests.
+- **altTags :** Modify the tags according to your needs. You can add or remove them. Do not forget to add each time the identifier of the channel on which you want to retrieve the article.
+- **principalTag :** Please retrieve all articles on a specific tag. For example, I use it to filter all articles in the francophone community that are available on the fr tag, you can delete this parameter if you specify at least one altTags.
+- **principalChan** Enter here the channel id on which to receive articles that pass on the **principalTag** but not on altTags.
+- **maintenance :** Takes as parameter the channel id of your choice. It allows you to recover errors directly on your Discord server. 
+
+Convenient in case of crash to receive immediate notification. I use it on a private channel so that visitors can't see errors and tests.
 
 You can specify **a single principalTag** and as **many altTags as you like**. The bot will sort the articles and send them to the channels you specify in the **config.json** file.
 
