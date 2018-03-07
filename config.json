@@ -1,4 +1,8 @@
 { 
-  "token"  : "API KEY FROM YOUR APPLICATION DISCORD",
-  "prefix" : "$"
+  "token"  : "YOUR TOKEN DISCORD",
+  "prefix" : "$",
+  "altTags" : {"life" : "ID FROM THE CHAN", "blog" : "ID FROM THE CHAN", "photography" : "ID FROM THE CHAN" },
+  "principalTag" : "steemit",
+  "principalChan" : "ID FROM THE CHAN",
+  "maintenance" : "ID FROM THE CHAN"
 }
