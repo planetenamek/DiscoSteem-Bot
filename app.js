@@ -1,8 +1,8 @@
 const Discord = require("discord.js");
 const steem = require("steem");
-const bot = new Discord.Client();
-
 var config = require("./config.json");
+
+const bot = new Discord.Client();
 
 var streamOp = require("./actions/streamOp.js");
 var cmd = require("./cmd-bot.js");
