@@ -1,7 +1,7 @@
 {
 	"infoCmdBot" : { "lastPost" : "**$last-post** - Prend en paramètre l'auteur de votre choix sans l'@ et affiche son dernier article.", 
-                 "created" : "**$created** - Prend en paramètre le tag de votre choix et le nombre d'article à afficher (max 50).",
-                 "bal" : "**$bal** - Prend en paramètre l'auteur de votre choix sans l'@ et affiche son wallet.",
-                 "search" : "**$search** - Prend en paramètre l'auteur de votre choix, le tag à cibler et le nombre d'article sur lesquels effectuer la recherche. La commande renvoi les articles correspondant au tags séléctionné."
-               }
+                     "created" : "**$created** - Prend en paramètre le tag de votre choix et le nombre d'article à afficher (max 50).",
+                     "bal" : "**$bal** - Prend en paramètre l'auteur de votre choix sans l'@ et affiche son wallet.",
+                     "search" : "**$search** - Prend en paramètre l'auteur de votre choix, le tag à cibler et le nombre d'article sur lesquels effectuer la recherche. La commande renvoi les articles correspondant au tags séléctionné."
+                   }
 }          
