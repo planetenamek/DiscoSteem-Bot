@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const steem = require("steem");
-var config = require("./config.json");
+const config = require("./config.json");
 
 const bot = new Discord.Client();
 
