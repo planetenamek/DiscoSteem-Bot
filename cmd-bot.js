@@ -5,7 +5,7 @@ const config = require("./config.json");
 var info = require("./info.json");
 
 var getCreated = require("./actions/created.js");
-var getDiscussion = require("./actions/discussion-bfd.js");
+var getDiscussion = require("./actions/discussionBFD.js");
 var getWallet = require("./actions/wallet.js");
 
 
