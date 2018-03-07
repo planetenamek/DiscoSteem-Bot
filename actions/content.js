@@ -30,7 +30,7 @@ exports.getContent = function(author,permlink,idChannel) {
 
    if(date === update) {
      bot.channels.get(idChannel).send({embed});
-     console.log("Article posté avec succès !");
+     console.log("New post on " + tag[0] " category !");
    }
   }
  });
