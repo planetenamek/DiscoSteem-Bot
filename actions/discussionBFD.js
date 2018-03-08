@@ -36,7 +36,7 @@ exports.discussionBFD = function(value,author,limit,message) {
       if(message.member.permissions.has("ADMINISTRATOR") || message.member.permissions.has("MANAGE_CHANNELS") ){
        message.channel.send("https://busy.org/" + tag[0] + "/@" + author + "/" + permlink);
       }else{
-       return message.channel.send("Désolé vous n'avez pas accès à cette commande pour le moment.");
+       return message.channel.send("Sorry you do not have access to this command for the moment.");
       }
      }
     }
