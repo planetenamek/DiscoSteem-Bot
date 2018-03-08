@@ -16,7 +16,7 @@ exports.created = function(tag,limit,message) {
     }  
    });
   }else{
-   return message.channel.send("Sorry the limit from this command is min 1 post and max 10 post ! Try again");
+   return message.channel.send("Sorry the limit from this command is min 1 post and max 100 post ! Try again");
   }
 }else{
  return message.channel.send("You are not allowed to perform this action. (Admin or Mod only)");
