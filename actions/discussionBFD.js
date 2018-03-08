@@ -24,7 +24,7 @@ exports.discussionBFD = function(value,author,limit,message) {
          .setURL("https://busy.org" + result[0].url)
     
     if(typeof img != "undefined"){
-      .setThumbnail(img[0])
+      embed.setThumbnail(img[0])
     }
     
     return message.channel.send({embed});
