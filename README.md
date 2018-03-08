@@ -30,12 +30,11 @@ You can specify **a single principalTag** and as **many altTags as you like**. T
 ## Install 
 You will need a Node JS environment 
 
-- npm install discord.js --save 
-- npm install steem --save 
+- npm install
 
 ## Configuration
 
-Go to the config.json file to add your Discord API application key, and to set up your application.
+Go to the config file.json to add your Discord API application key and configure the ids of your Discord channels.
 
 
 ## More informations
