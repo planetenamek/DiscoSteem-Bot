@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
 const steem = require("steem");
 const config = require("./../config.json");
-
 const bot = new Discord.Client();
 
 bot.login(config.token)
@@ -16,7 +15,7 @@ exports.getContent = function(author,permlink,idChannel) {
        date = result.created,
        update = result.last_update,
        embed = new Discord.RichEmbed();
-
+  
    embed.setAuthor(author + " (" + reputation + ")", )
         .setTitle(result.title)
         .setColor(0x00AE86)
@@ -24,7 +23,7 @@ exports.getContent = function(author,permlink,idChannel) {
         .setTimestamp()
         .setURL("https://busy.org" + result.url)
 
-   if(dataContent.image != "undefined" && dataContent.image != undefined && dataContent.image != null){
+   if(dataContent.image != "undefined" && dataContent.image != null){
     embed.setImage(dataContent.image[0])                                
    }
 
