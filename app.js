@@ -9,7 +9,7 @@ var cmd = require("./cmd-bot.js");
 
 bot.on("ready", () => {
  console.log("App-Stream-V2 Ready !"); 
- bot.user.setActivity("Stream Steem !");
+ bot.user.setGame('Stream Steem');
  streamOp.stream();
 }); 
 
