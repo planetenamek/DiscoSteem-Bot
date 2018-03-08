@@ -6,7 +6,7 @@ exports.created = function(tag,limit,message) {
   if(limit > 0 && limit <= 100) {    
    steem.api.getDiscussionsByCreated({"tag": tag[0], "limit": limit}, function(err, result) {
     if(result){
-     for (i = 0; i < result.length; i++) {
+     for (i = 1; i < result.length; i++) {
       let author = result[i]["author"],
           permlink = result[i]["permlink"]
       message.channel.send("https://busy.org/" + tag + "/@" + author + "/" + permlink);
