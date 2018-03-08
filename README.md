@@ -38,3 +38,6 @@ You will need a Node JS environment
 Go to the config.json file to add your Discord API application key, and to set up your application.
 
 
+## More informations
+
+https://steemit.com/utopian-io/@planetenamek/discosteem-bot-update-new-features-to-animate-your-discord-server
