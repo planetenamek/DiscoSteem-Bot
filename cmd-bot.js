@@ -8,7 +8,9 @@ var getCreated = require("./actions/created.js");
 var getDiscussion = require("./actions/discussionBFD.js");
 var getWallet = require("./actions/wallet.js");
 
-
+const bot = new Discord.Client();
+ 
+ bot.login(config.token)
 
 module.exports = { 
   getLastPost : function(message) {
