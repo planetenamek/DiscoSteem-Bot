@@ -38,8 +38,8 @@ bot.on("message", async message => {
  }
  
  if(command === "curate") {
-			return cmd.curateArticle(message);
-		}
+  return cmd.curateArticle(message);
+ }
 
   if(command === "help") {
   return cmd.help(message);
