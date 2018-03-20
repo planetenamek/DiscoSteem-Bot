@@ -36,6 +36,10 @@ bot.on("message", async message => {
  if(command === "bal") {
   return cmd.getWallet(message);
  }
+ 
+ if(command === "curate") {
+			return cmd.curateArticle(message);
+		}
 
   if(command === "help") {
   return cmd.help(message);
