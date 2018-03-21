@@ -67,7 +67,7 @@ module.exports = {
         embed.setTitle("List of the command from the bot")  
               .setDescription("-----------------------------------------\n\n" +
                               info.infoCmdBot["lastPost"] +"\n\n" + info.infoCmdBot["created"] + "\n\n" +
-                              info.infoCmdBot["bal"] + "\n\n" + info.infoCmdBot["search"])
+                              info.infoCmdBot["bal"] + "\n\n" + info.infoCmdBot["search"] + "\n\n" + info.infoCmdBot["curatePost"])
               .setColor("#7DDF64")
               .setTimestamp()
         return message.channel.send({embed});
