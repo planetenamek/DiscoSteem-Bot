@@ -55,8 +55,8 @@ module.exports = {
                 ope2 = ope1.shift()             
                 ope3 = ope2.split("/")
                 author = ope3.shift()		
-            	useful = "----------------\n**Author :** @" + author + "\n----------------\n**Description :** \n
-	                    \n" + description + "\n\n" + link
+            	useful = "----------------\n**Author :** @" + author + 
+			 "\n----------------\n**Description :** \n\n" + description + "\n\n" + link
 	        bot.channels.get(config.curationChan).send(useful)
              return message.channel.send("Saved to curation channel !");
 	},
