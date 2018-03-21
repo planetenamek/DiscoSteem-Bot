@@ -13,7 +13,7 @@ and the second one is the number (min = 1, max = 15) of items to display.
 - **search** does an article search based on the parameters you specify. ***- Ex: $search planetenamek fr 30 -*** will search in my last 30 articles and return all articles containing the tag **FR**
 - **$bal** displays the wallet of the Steem account of your choice. ***- Ex: $bal planetenamek -*** will display my wallet.
 ***Each command ($...) that requires a parameter must be separated by a space***
-
+- **$curate post_Description of your post here_Full Steemit link to your post** saves those information on "curateChan"
 ### StreamOperation
 
 You can now display the Steemit articles of your choice directly on your Discord server. Change the settings to suit your needs in the **config.json** file :
@@ -22,7 +22,7 @@ You can now display the Steemit articles of your choice directly on your Discord
 - **principalTag :** Used to retrieve items based on a specific tag. For example, I use it to filter articles from the Francophone community on #fr
 - **principalChan** Enter here the channel id on which to receive articles that pass on the **principalTag** but not on altTags.
 - **maintenance :** Takes as parameter the channel id of your choice. It allows you to recover errors directly on your Discord server. 
-
+- **curateChan :** Enter here the channel id on which to receive curation proposition from your community **(with $curate post)**
 Convenient in case of crash to receive immediate notification. I use it on a private channel so that visitors can't see errors and tests.
 
 You can specify **a single principalTag** and as **many altTags as you like**. The bot will sort the articles and send them to the channels you specify in the **config.json** file.

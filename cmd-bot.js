@@ -8,7 +8,9 @@ var getCreated = require("./actions/created.js");
 var getDiscussion = require("./actions/discussionBFD.js");
 var getWallet = require("./actions/wallet.js");
 
-
+const bot = new Discord.Client();
+ 
+ bot.login(config.token)
 
 module.exports = { 
   getLastPost : function(message) {
@@ -42,6 +44,22 @@ module.exports = {
 
     return getWallet.wallet(account,message);
   },
+  
+  curateArticle : function(message) {
+	    let element = message.content.split("_")                 
+		useless = element.shift()      
+		description = element.shift()		
+                link = element.shift()          
+                ope1 = link.split("@")         
+                useless2 = ope1.shift()         
+                ope2 = ope1.shift()             
+                ope3 = ope2.split("/")
+                author = ope3.shift()		
+            	useful = "----------------\n**Author :** @" + author + 
+			 "\n----------------\n**Description :** \n\n" + description + "\n\n" + link
+	        bot.channels.get(config.curationChan).send(useful)
+             return message.channel.send("Saved to curation channel !");
+	},
 
   help : function(message) {
     let embed = new Discord.RichEmbed();
@@ -49,7 +67,7 @@ module.exports = {
         embed.setTitle("List of the command from the bot")  
               .setDescription("-----------------------------------------\n\n" +
                               info.infoCmdBot["lastPost"] +"\n\n" + info.infoCmdBot["created"] + "\n\n" +
-                              info.infoCmdBot["bal"] + "\n\n" + info.infoCmdBot["search"])
+                              info.infoCmdBot["bal"] + "\n\n" + info.infoCmdBot["search"] + "\n\n" + info.infoCmdBot["curatePost"])
               .setColor("#7DDF64")
               .setTimestamp()
         return message.channel.send({embed});
