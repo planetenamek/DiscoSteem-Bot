@@ -1,4 +1,4 @@
-# DiscoSteem-Bot (0.1.0)
+# DiscoSteem-Bot (0.1.1)
 
 **A Discord bot that interacts with the Steem blockchain API**
 
