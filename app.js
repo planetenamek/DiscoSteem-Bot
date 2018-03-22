@@ -5,6 +5,7 @@ const config = require("./config.json");
 const bot = new Discord.Client();
 
 var cmd = require("./cmd-bot.js");
+var count = 0;
 
 bot.on("ready", () => {
  console.log("App-Stream-V2 Ready !"); 
