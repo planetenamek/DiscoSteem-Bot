@@ -7,12 +7,10 @@ var info = require("./info.json");
 var getCreated = require("./actions/created.js");
 var getDiscussion = require("./actions/discussionBFD.js");
 var getWallet = require("./actions/wallet.js");
-var streamOp = require("./actions/streamOp.js");
-
 
 const bot = new Discord.Client();
  
- bot.login(config.token)
+bot.login(config.token)
 
 module.exports = { 
   getLastPost : function(message) {
@@ -45,16 +43,6 @@ module.exports = {
         account.shift()
 
     return getWallet.wallet(account,message);
-  },
-	
-  lunchStream : function(count){
-    if(count === 0) {
-        streamOp.stream();
-        count++;
-        console.log("Stream is ready !");
-     }else{
-        console.log("Stream is already activated");
-     }
   },
   
   curateArticle : function(message) {
