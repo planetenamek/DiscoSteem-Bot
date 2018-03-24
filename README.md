@@ -13,7 +13,7 @@ and the second one is the number (min = 1, max = 15) of items to display.
 - **search** does an article search based on the parameters you specify. ***- Ex: $search planetenamek fr 30 -*** will search in my last 30 articles and return all articles containing the tag **FR**
 - **$bal** displays the wallet of the Steem account of your choice. ***- Ex: $bal planetenamek -*** will display my wallet.
 ***Each command ($...) that requires a parameter must be separated by a space***
-- **$curate post_Description of your post here_Full Steemit link to your post** saves those information on "curateChan"
+- **$curate_Description of your post here_Full Steemit link to your post** saves those information on "curateChan"
 ### StreamOperation
 
 You can now display the Steemit articles of your choice directly on your Discord server. Change the settings to suit your needs in the **config.json** file :
