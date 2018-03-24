@@ -36,7 +36,7 @@ bot.on("message", async message => {
   return cmd.getWallet(message);
  }
  
- if(command === "curate") {
+ if(command.startsWith("curate")) {
   return cmd.curateArticle(message);
  }
 
