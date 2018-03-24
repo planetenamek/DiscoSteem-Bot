@@ -4,14 +4,12 @@ const config = require("./config.json");
 
 const bot = new Discord.Client();
 
+var streamOp = require("./actions/streamOp.js");
 var cmd = require("./cmd-bot.js");
-var count = 0;
 
 bot.on("ready", () => {
- console.log("App-Stream-V2 Ready !"); 
+ console.log("DiscoSteem-V2 Ready !"); 
  bot.user.setGame('Stream Steem');
- cmd.lunchStream(count);
- count++;
 }); 
 
 bot.on("message", async message => {
@@ -51,6 +49,7 @@ bot.on("message", async message => {
 bot.login(config.token);
 
 
+streamOp.stream();
 
 
 
