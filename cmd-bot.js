@@ -47,15 +47,13 @@ module.exports = {
   
   curateArticle : function(message) {
     let element = message.content.split("_")                 
-	useless = element.shift()      
-	description = element.shift()		
-        link = element.shift()          
-        ope1 = link.split("@")         
-        useless2 = ope1.shift()         
-        ope2 = ope1.shift()             
-        ope3 = ope2.split("/")
-        author = ope3.shift()		
-        useful = "----------------\n**Author :** @" + author + 
+	link = element.pop();
+	description = element.pop();
+	dataLink = link.split("/");
+	author = dataLink.slice(4,5); 
+	author = String(author);
+	  
+        useful = "----------------\n**Author :** " + author + 
 	         "\n----------------\n**Description :** \n\n" + description + "\n\n" + link
      bot.channels.get(config.curationChan).send(useful)
      return message.channel.send("Saved to curation channel !");
