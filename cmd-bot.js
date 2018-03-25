@@ -62,7 +62,6 @@ module.exports = {
   clearMessage : function(message) {
      let value = message.content.split(" ")
          value = value.pop()
-         value = parseInt(value)
     
      if(message.member.permissions.has("ADMINISTRATOR")){
       if(value > 0 && value < 100) {
