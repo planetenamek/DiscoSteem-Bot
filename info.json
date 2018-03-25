@@ -2,7 +2,9 @@
   "infoCmdBot" : { "lastPost" : "**$last-post** - Takes as parameter the author of your choice without @ and displays its last article.", 
                    "created" : "**$created** - Takes as parameter the tag of your choice and the number of items to display (max 50 - Admin and Mod only).",
                    "bal" : "**$bal** - Takes as parameter the author of your choice without @ and displays its wallet.",
-                   "curatePost" : "**$curate post_Description of your post here_Full link to your Steemit post** - Write the command as is and replace the informations.",
-                   "search" : "**$search** - Takes as parameter the author of your choice, the tag to target and the number of articles to search. The order returns the items corresponding to the tag selected. (Admin and Mod only)"
+                   "curatePost" : "**$curate_Description of your post here_Full link to your Steemit post** - Write the command as is and replace the informations.",
+                   "search" : "**$search** - Takes as parameter the author of your choice, the tag to target and the number of articles to search. The order returns the items corresponding to the tag selected. (Admin and Mod only)",
+                   "clear" : "**$clear** deletes messages from the channel you are on. **- Ex : $clear 30 -**",
+                   "rank" : "**$rank** Displays the rank of the user of your choice. (minnow, dolphin, orca)"
                  }
 }          

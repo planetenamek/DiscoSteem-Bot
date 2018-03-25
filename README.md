@@ -1,6 +1,24 @@
-# DiscoSteem-Bot (0.1.1)
+# DiscoSteem-Bot (0.2.1)
 
 **A Discord bot that interacts with the Steem blockchain API**
+
+## Release 0.2.1
+
+### New implementations
+
+DiscoSteem-Bot now offers an upvote system from your Discord server. To vote for an article you can simply add a reaction,that you have previously defined, to a Steemit/Busy link.
+
+The curate function has been improved to allow data to be stored in a JSON file. This allows simple data reuse and also allows more efficient processing.
+
+We have implemented the $rank function to display a Steem user's rank. The function calculates the VEST and returns the rank and number of VEST remaining to reach the next level.
+
+### Bug fixing
+
+Stream's function was struggling to last over time. We have corrected the major problems and now you can Streamer the Steem blockchain without interruption.
+
+We also added a function allowing the bot to detect its disconnection, which allows us to restart it immediately.
+
+We've added a feature that allows you to delete messages quickly and easily. With the $clear function add the number of messages (max 100) to delete and the bot will clean your Discord channel in a split second.
 
 ## Function of the bot
 
@@ -14,6 +32,9 @@ and the second one is the number (min = 1, max = 15) of items to display.
 - **$bal** displays the wallet of the Steem account of your choice. ***- Ex: $bal planetenamek -*** will display my wallet.
 ***Each command ($...) that requires a parameter must be separated by a space***
 - **$curate_Description of your post here_Full Steemit link to your post** saves those information on "curateChan"
+- **$clear** deletes messages from the channel you are on. **- Ex : $clear 30 -**
+- **$rank** Displays the rank of the user of your choice. (minnow, dolphin, orca)  
+
 ### StreamOperation
 
 You can now display the Steemit articles of your choice directly on your Discord server. Change the settings to suit your needs in the **config.json** file :
