@@ -2,10 +2,10 @@ const Discord = require("discord.js");
 const steem = require("steem");
 
 var redFish = 999999,
-minnow = 9999999, 
-dolphin = 99999999, 
-orca = 999999999, 
-whales = 9999999999;
+    minnow = 9999999, 
+    dolphin = 99999999, 
+    orca = 999999999, 
+    whales = 9999999999;
 
 
 
