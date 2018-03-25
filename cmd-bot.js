@@ -87,7 +87,7 @@ module.exports = {
  checkReaction : function(reaction,user,err) {
   try{
    if(reaction.emoji.name === checkEmo) {
-    if(user.username === "planetenamek (Amélie)") {
+    if(user.username === config.adminName) {
      data = reaction.message.embeds[0].url
      if(data.startsWith("https://")) {
       data = data.split("/")

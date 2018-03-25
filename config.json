@@ -6,5 +6,6 @@
   "principalChan" : "ID FROM THE CHAN",
   "curationChan" : "ID FROM THE CHAN",
   "maintenance" : "ID FROM THE CHAN",
-  "checkEmoji" : "✅"
+  "checkEmoji" : "✅",
+  "adminName" : "planetenamek (Amélie)"
 }
