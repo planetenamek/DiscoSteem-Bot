@@ -39,6 +39,10 @@ bot.on("message", async message => {
  if(command.startsWith("curate")) {
   return cmd.curateArticle(message);
  }
+ 
+ if(command === "clear") {
+  return cmd.clearMessage(message);
+ }
 
   if(command === "help") {
   return cmd.help(message);
