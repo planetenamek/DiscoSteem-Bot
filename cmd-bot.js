@@ -58,6 +58,22 @@ module.exports = {
      bot.channels.get(config.curationChan).send(useful)
      return message.channel.send("Saved to curation channel !");
   },
+	
+  clearMessage : function(message) {
+     let value = message.content.split(" ")
+         value = value.pop()
+         value = parseInt(value)
+    
+     if(message.member.permissions.has("ADMINISTRATOR")){
+      if(value > 0 && value < 100) {
+        message.channel.bulkDelete(value)
+      }else{
+        message.channel.send("Error ! Please try with value > 0 or < 100");
+      }
+     }else{
+       message.channel.send("Sorry this command is reserved to admin !")
+     }
+  },
 
   help : function(message) {
     let embed = new Discord.RichEmbed();
