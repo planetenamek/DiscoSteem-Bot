@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const steem = require("steem");
 const config = require("./config.json");
 
-const bot = new Discord.Client();
+var bot = new Discord.Client({autoReconnect:true});
 
 var streamOp = require("./actions/streamOp.js");
 var cmd = require("./cmd-bot.js");
@@ -44,14 +44,19 @@ bot.on("message", async message => {
   return cmd.clearMessage(message);
  }
 
-  if(command === "help") {
+ if(command === "help") {
   return cmd.help(message);
  }
 
 });
 
-bot.login(config.token);
+bot.on("disconnect", function() {
+ console.log("Bot disconnected");
+ bot.connect() // Restart
+ console.log("Bot reconnected !");
+});
 
+bot.login(config.token);
 
 streamOp.stream();
 
