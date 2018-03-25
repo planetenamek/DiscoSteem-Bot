@@ -84,6 +84,25 @@ module.exports = {
   return getRank.ranking(name,message);
  },
 
+ checkReaction : function(reaction,user,err) {
+  try{
+   if(reaction.emoji.name === checkEmo) {
+    if(user.username === "planetenamek (Amélie)") {
+     data = reaction.message.embeds[0].url
+     if(data.startsWith("https://")) {
+      data = data.split("/")
+      permlink = data.pop();
+      author = data.pop();
+        
+      return postVote.upvote(author,permlink);
+     }
+    }
+   }
+  }catch(err) {
+    console.log("Invalid link !!");
+  }
+ },
+
  help : function(message) {
   let embed = new Discord.RichEmbed();
       // Descriptions command help
