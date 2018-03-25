@@ -8,6 +8,7 @@ var getCreated = require("./actions/created.js");
 var getDiscussion = require("./actions/discussionBFD.js");
 var getRank = require("./actions/ranking.js")
 var getWallet = require("./actions/wallet.js");
+var postVote = require("./actions/upvote.js");
 
 const bot = new Discord.Client();
 
