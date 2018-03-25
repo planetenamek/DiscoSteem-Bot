@@ -44,6 +44,10 @@ bot.on("message", async message => {
   return cmd.clearMessage(message);
  }
 
+ if(command === "rank") {
+  return cmd.getRanking(message);
+ }
+
  if(command === "help") {
   return cmd.help(message);
  }

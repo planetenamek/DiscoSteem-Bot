@@ -6,6 +6,7 @@ var info = require("./info.json");
 
 var getCreated = require("./actions/created.js");
 var getDiscussion = require("./actions/discussionBFD.js");
+var getRank = require("./actions/ranking.js")
 var getWallet = require("./actions/wallet.js");
 
 const bot = new Discord.Client();
@@ -72,6 +73,13 @@ module.exports = {
      }else{
        message.channel.send("Sorry this command is reserved to admin !")
      }
+  },
+
+  getRanking : function(message) {
+    let name = message.content.split(" ")
+        name.shift()
+        name = String(name)
+    return getRank.ranking(name,message);
   },
 
   help : function(message) {
