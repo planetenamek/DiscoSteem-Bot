@@ -54,6 +54,10 @@ bot.on("message", async message => {
 
 });
 
+bot.on("messageReactionAdd", (reaction, user) => {
+  return cmd.checkReaction(reaction,user);
+});
+
 bot.on("disconnect", function() {
  console.log("Bot disconnected");
  bot.connect() // Restart
