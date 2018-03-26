@@ -45,7 +45,7 @@ and the second one is the number (min = 1, max = 15) of items to display.
 - **search** does an article search based on the parameters you specify. ***- Ex: $search planetenamek fr 30 -*** will search in my last 30 articles and return all articles containing the tag **FR**
 - **$bal** displays the wallet of the Steem account of your choice. ***- Ex: $bal planetenamek -*** will display my wallet.
 ***Each command ($...) that requires a parameter must be separated by a space***
-- **$curate_Description of your post here_Full Steemit link to your post** saves those information on "curateChan"
+- **$curate_Description of your post here_Full Steemit link to your post** saves those information on "curateChan" or on "savingSubmissionChan"
 - **$clear** deletes messages from the channel you are on. **- Ex : $clear 30 -**
 - **$rank** Displays the rank of the user of your choice. (minnow, dolphin, orca)  
 
