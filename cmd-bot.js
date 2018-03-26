@@ -77,7 +77,7 @@ module.exports = {
       value = value.pop()
 
   if(message.member.permissions.has("ADMINISTRATOR")){
-   if(value > 0 && value < 100) {
+   if(value > 0 && value <= 100) {
     message.channel.bulkDelete(value)
    }else{
     message.channel.send("Error ! Please try with value > 0 or < 100");
@@ -97,8 +97,9 @@ module.exports = {
 
  checkReaction : function(reaction,user,err) {
   try{
-   if(reaction.emoji.name === checkEmo) {
-    if(user.username === config.adminName) {
+   console.log(user.message)
+   if(reaction.emoji.name === config.checkEmoji) {
+    if(user.id === config.voterID) {
      data = reaction.message.embeds[0].url
      if(data.startsWith("https://")) {
       data = data.split("/")
@@ -110,7 +111,7 @@ module.exports = {
     }
    }
   }catch(err) {
-    console.log("Invalid link !!");
+    console.log(err);
   }
  },
 
