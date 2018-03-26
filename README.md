@@ -10,7 +10,19 @@ DiscoSteem-Bot now offers an upvote system from your Discord server. To vote for
 
 The curate function has been improved to allow data to be stored in a JSON file. This allows simple data reuse and also allows more efficient processing.
 
+> The $curate function now offers two services depending on the channels you have configured.
 
+#### For all users: 
+
+Configure in config.json the parameter **postSubmissionChan** all links and descriptions posted on this channel will go directly to the channel you configured with **savingSubmissionChan**.
+
+#### For moderators and curators
+
+Configure in config.json the parameter **curationChan** all links and descriptions posted on this channel will go directly to the channel you have configured with **savingChan**.
+
+In addition to being saved in a different channel, the data will be saved in the file **post-saved.json** which will allow you to process them much more quickly and simply.
+
+**WARNING** : For more consistency think of configuring the permissions of your **curationChan** so that nobody can write there, but simply add reactions. This will allow you to have a very clean channel and therefore a better visibility to view the selected articles.
 
 We have implemented the $rank function to display a Steem user's rank. The function calculates the VEST and returns the rank and number of VEST remaining to reach the next level.
 
