@@ -10,6 +10,8 @@ DiscoSteem-Bot now offers an upvote system from your Discord server. To vote for
 
 The curate function has been improved to allow data to be stored in a JSON file. This allows simple data reuse and also allows more efficient processing.
 
+
+
 We have implemented the $rank function to display a Steem user's rank. The function calculates the VEST and returns the rank and number of VEST remaining to reach the next level.
 
 ### Bug fixing
@@ -37,14 +39,7 @@ and the second one is the number (min = 1, max = 15) of items to display.
 
 ### StreamOperation
 
-You can now display the Steemit articles of your choice directly on your Discord server. Change the settings to suit your needs in the **config.json** file :
-
-- **altTags :** Modify the tags according to your needs. You can add or remove them. Do not forget to add each time the identifier of the channel on which you want to retrieve the article.
-- **principalTag :** Used to retrieve items based on a specific tag. For example, I use it to filter articles from the Francophone community on #fr
-- **principalChan** Enter here the channel id on which to receive articles that pass on the **principalTag** but not on altTags.
-- **maintenance :** Takes as parameter the channel id of your choice. It allows you to recover errors directly on your Discord server. 
-- **curateChan :** Enter here the channel id on which to receive curation proposition from your community **(with $curate post)**
-Convenient in case of crash to receive immediate notification. I use it on a private channel so that visitors can't see errors and tests.
+You can now display the Steemit articles of your choice directly on your Discord server. Change the settings to suit your needs in the **config.json**.
 
 You can specify **a single principalTag** and as **many altTags as you like**. The bot will sort the articles and send them to the channels you specify in the **config.json** file.
 
@@ -56,6 +51,26 @@ You will need a Node JS environment
 ## Configuration
 
 - Go to the config.json file to add your Discord API application key and configure the ids of your Discord channels.
+
+```
+{ 
+  "token"  : "YOUR TOKEN DISCORD", 
+  "prefix" : "$", // prefix for all command's
+  "altTags" : {"life" : "ID FROM THE CHAN", "blog" : "ID FROM THE CHAN", "photography" : "ID FROM THE CHAN" },
+  "principalTag" : "steemit",
+  "principalChan" : "ID FROM THE CHAN",
+  "curationChan" : "ID FROM THE CHAN",
+  "postSubmissionChan" : "ID FROM THE CHAN",
+  "savingChan" : "ID FROM THE CHAN",
+  "savingSubmissionChan" : "ID FROM THE CHAN",
+  "maintenance" : "ID FROM THE CHAN",
+  "checkEmoji" : "✅",
+  "voterID" : "YOUR USER DISCORD ID",
+  "weightVote" : 10000,
+  "wif" : "YOUR PRIVATE POSTING KEY",
+  "voter" : "YOUR STEEM USERNAME"
+}
+```
 
 ## Run 
 
