@@ -1,6 +1,9 @@
 const Discord = require("discord.js");
 const steem = require("steem");
+const fs = require("fs");
 const config = require("./config.json");
+
+const roleID = config.voterID;
 
 var info = require("./info.json");
 
@@ -8,7 +11,7 @@ var getCreated = require("./actions/created.js");
 var getDiscussion = require("./actions/discussionBFD.js");
 var getRank = require("./actions/ranking.js")
 var getWallet = require("./actions/wallet.js");
-var curationSave = require("/actions/curationSave.js");
+var curationSave = require("./actions/curationSave.js");
 var postVote = require("./actions/upvote.js");
 
 const bot = new Discord.Client();
@@ -49,22 +52,26 @@ module.exports = {
  },
 
  curateArticle : function(message) {
-   if(message.channel.id === config.postSubmissioChan){
+   if(message.channel.id === config.curationChan){
        return curationSave.curation(message);
-   }else if(message.channel.id === config.curationChan) {
+   }else if(message.channel.id === config.postSubmissionChan) {
     let element = message.content.split("%")                 
 	link = element.pop();
 	description = element.pop();
 	dataLink = link.split("/");
-	author = dataLink.slice(4,5); 
+        if(link.startsWith("https://busy")) {
+	 author = dataLink.slice(3,4);
+        }else{
+         author = dataLink.slice(4,5);
+        } 
 	author = String(author);
 	  
-    useful = "----------------\n**Author :** " + author + 
+        useful = "----------------\n**Author :** " + author + 
 	         "\n----------------\n**Description :** \n\n" + description + "\n\n" + link
-    bot.channels.get(config.curationChan).send(useful)
-    return message.channel.send("Saved to curation channel !");
+     bot.channels.get(config.savingSubmissionChan).send(useful)
+     return message.channel.send("Saved to curation channel !");
    }else{
-    message.channel.send("Please use $curate in #postsubmission !")
+       message.channel.send("Please use $curate in #postsubmission !")
    }
  },
 
@@ -76,7 +83,7 @@ module.exports = {
    if(value > 0 && value <= 100) {
     message.channel.bulkDelete(value)
    }else{
-    message.channel.send("Error ! Please try with value > 0 or < 100");
+    message.channel.send("Error ! Please try with value > 0 or <= 100");
    }
   }else{
     message.channel.send("Sorry this command is reserved to admin !")
@@ -94,7 +101,7 @@ module.exports = {
  checkReaction : function(reaction,user,err) {
   try{
    if(reaction.emoji.name === config.checkEmoji) {
-    if(user.id === config.voterID) {
+    if(user.id === roleID) {
      data = reaction.message.embeds[0].url
      if(data.startsWith("https://")) {
       data = data.split("/")

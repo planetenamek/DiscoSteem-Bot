@@ -2,7 +2,8 @@
   "name": "discosteem",
   "version": "0.2.1",
   "dependencies": {
-    "steem": "~0.7",
-    "discord.js": "~11.2"
+    "discord.js": "~11.2",
+    "file-system": "^2.2.2",
+    "steem": "~0.7"
   }
 }
