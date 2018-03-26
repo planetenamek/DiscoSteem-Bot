@@ -10,7 +10,10 @@ var cmd = require("./cmd-bot.js");
 bot.on("ready", () => {
  console.log("DiscoSteem-V2 Ready !"); 
  bot.user.setGame('Stream Steem');
-}); 
+ var interval = setInterval (function () {
+     bot.destroy() // Restart
+    }, 1 * 600000);
+ }); 
 
 bot.on("message", async message => {
  const args = message.content.slice(config.prefix.length).trim().split(/ +/g)
@@ -19,7 +22,7 @@ bot.on("message", async message => {
  if(message.author.bot) return
 
  if(message.content.indexOf(config.prefix) !== 0) return
- 
+
  if(command === "created") {
   return cmd.getCreatedContent(message);
  }
@@ -59,9 +62,9 @@ bot.on("messageReactionAdd", (reaction, user) => {
 });
 
 bot.on("disconnect", function() {
- console.log("Bot disconnected");
- bot.connect() // Restart
- console.log("Bot reconnected !");
+  console.log("Bot disconnected");
+  bot.login(config.token);
+  console.log("DiscoSteem-V2 Ready !");
 });
 
 bot.login(config.token);

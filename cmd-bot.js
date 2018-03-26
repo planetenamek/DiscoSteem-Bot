@@ -48,26 +48,31 @@ module.exports = {
  },
 
  curateArticle : function(message) {
-  thumbnail = message.embeds[0].thumbnail.url
-  element = message.content.split("%")                 
+  thumbnail = "";
+  element = message.content.split("%")
   link = element.pop();
   description = element.pop();
   dataLink = link.split("/");
-  author = dataLink.slice(4,5); 
+  author = dataLink.slice(3,4);
   author = String(author);
-          
-  fs.readFile('reception-content.json', 'utf8', function readFileCallback(err, data){
+  embed = new Discord.RichEmbed()
+  embed.setAuthor(author)
+       .setDescription(description)
+       .setColor("#7DDF64")
+
+  fs.readFile('post-saved.json', 'utf8', function readFileCallback(err, data){
    if (err){
     console.log(err);
    } else {
-    obj = JSON.parse(data); 
-    obj.nomination.push({id: message.id, description:description, author:author, link:link, thumbnail:thumbnail}); 
+    obj = JSON.parse(data);
+    obj.nomination.push({id: message.id, description:description, author:author, link:link, thumbnail:thumbnail});
     json = JSON.stringify(obj);
-    fs.writeFile('post-saved.json', json, 'utf8', cb); // write it back 
+    fs.writeFile('post-saved.json', json, 'utf8', cb); // write it back
   }});
 
   cb = function(){
-    bot.channels.get(config.curationChan).send(author + "\n" + description + " \n" + link);
+    bot.channels.get(config.curationChan).send({embed});
+    bot.channels.get(config.curationChan).send("\n" + link);
     message.channel.send("Saved to curation file !");
   }
  },
