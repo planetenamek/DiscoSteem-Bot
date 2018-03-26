@@ -5,5 +5,13 @@
   "principalTag" : "steemit",
   "principalChan" : "ID FROM THE CHAN",
   "curationChan" : "ID FROM THE CHAN",
-  "maintenance" : "ID FROM THE CHAN"
+  "postSubmissionChan" : "ID FROM THE CHAN",
+  "savingChan" : "ID FROM THE CHAN",
+  "savingSubmissionChan" : "ID FROM THE CHAN",
+  "maintenance" : "ID FROM THE CHAN",
+  "checkEmoji" : "✅",
+  "voterID" : "YOUR USER DISCORD ID",
+  "weightVote" : 10000,
+  "wif" : "YOUR PRIVATE POSTING KEY",
+  "voter" : "YOUR STEEM USERNAME"
 }

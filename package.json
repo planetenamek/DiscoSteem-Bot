@@ -1,8 +1,8 @@
 {
-  "name": "DiscoSteem",
-  "version": "0.1.1",
+  "name": "discosteem",
+  "version": "0.2.1",
   "dependencies": {
-    "steem": "~0.7",
-    "discord.js": "~11.2"
+    "discord.js": "~11.2",
+    "steem": "~0.7"
   }
 }

@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const steem = require("steem");
 const config = require("./config.json");
 
-const bot = new Discord.Client();
+var bot = new Discord.Client({autoReconnect:true});
 
 var streamOp = require("./actions/streamOp.js");
 var cmd = require("./cmd-bot.js");
@@ -10,7 +10,10 @@ var cmd = require("./cmd-bot.js");
 bot.on("ready", () => {
  console.log("DiscoSteem-V2 Ready !"); 
  bot.user.setGame('Stream Steem');
-}); 
+ var interval = setInterval (function () {
+     bot.destroy() // Restart
+    }, 1 * 600000);
+ }); 
 
 bot.on("message", async message => {
  const args = message.content.slice(config.prefix.length).trim().split(/ +/g)
@@ -19,7 +22,7 @@ bot.on("message", async message => {
  if(message.author.bot) return
 
  if(message.content.indexOf(config.prefix) !== 0) return
- 
+
  if(command === "created") {
   return cmd.getCreatedContent(message);
  }
@@ -44,14 +47,27 @@ bot.on("message", async message => {
   return cmd.clearMessage(message);
  }
 
-  if(command === "help") {
+ if(command === "rank") {
+  return cmd.getRanking(message);
+ }
+
+ if(command === "help") {
   return cmd.help(message);
  }
 
 });
 
-bot.login(config.token);
+bot.on("messageReactionAdd", (reaction, user) => {
+  return cmd.checkReaction(reaction,user);
+});
 
+bot.on("disconnect", function() {
+  console.log("Bot disconnected");
+  bot.login(config.token);
+  console.log("DiscoSteem-V2 Ready !");
+});
+
+bot.login(config.token);
 
 streamOp.stream();
 

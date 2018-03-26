@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const steem = require("steem");
 const config = require("./../config.json");
 
-const bot = new Discord.Client();
+var bot = new Discord.Client({autoReconnect:true});
 
 steem.api.setOptions({ url: 'https://api.steemit.com/' });
 
@@ -32,6 +32,7 @@ exports.stream = function() {
    }
   }catch(err){
     console.log(err);
+	process.exit(1);
   } 
  });
 }
