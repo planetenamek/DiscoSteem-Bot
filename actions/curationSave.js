@@ -20,6 +20,7 @@ exports.curation = function(message) {
       .setDescription(description + "\n\n" + link)
       .setColor("#7DDF64")
       .setTimestamp()
+      .setURL(link)
   
  fs.readFile('post-saved.json', 'utf8', function readFileCallback(err, data){
   if (err){
