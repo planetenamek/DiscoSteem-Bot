@@ -3,7 +3,6 @@
   "version": "0.2.1",
   "dependencies": {
     "discord.js": "~11.2",
-    "file-system": "^2.2.2",
     "steem": "~0.7"
   }
 }
