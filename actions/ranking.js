@@ -36,18 +36,18 @@ exports.ranking = function(name, message) {
       message.channel.send({embed});
     }if(checkVest > redFish && checkVest <= minnow) {
       lastLevel = dolphin - checkVest;
-      embed.setDescription(" ``` Level : Minnow \n VEST : " + checkVest.toFixed("3") +  " / " + steem_power.toFixed("3") + " SP. \n" + lastLevel.toFixed("3") + " VEST to become a DOLPHIN  ``` ");
+      embed.setDescription(" ```Level : Minnow \nVEST : " + checkVest.toFixed("3") +  " / " + steem_power.toFixed("3") + " SP. \n" + lastLevel.toFixed("3") + " VEST to become a DOLPHIN  ``` ");
       message.channel.send({embed});
     }if(checkVest > minnow && checkVest <= dolphin) {
       lastLevel = whales - checkVest;
-      embed.setDescription(" ``` Level : Dolphin \n VEST : " + checkVest.toFixed("3") +  " / " + steem_power.toFixed("3") + " SP. \n" + lastLevel.toFixed("3") + " VEST to become a ORCA  ``` ")
+      embed.setDescription(" ```Level : Dolphin \nVEST : " + checkVest.toFixed("3") +  " / " + steem_power.toFixed("3") + " SP. \n" + lastLevel.toFixed("3") + " VEST to become a ORCA  ``` ")
       message.channel.send({embed});
     }if(checkVest > dolphin && checkVest <= orca) {
       lastLevel = orca - checkVest;
-      embed.setDescription(" ``` Level : Orca \n VEST : " + checkVest.toFixed("3") +  " / " + steem_power.toFixed("3") + " SP. \n" + lastLevel.toFixed("3") + " VEST to become a WHALES  ``` ")
+      embed.setDescription(" ```Level : Orca \nVEST : " + checkVest.toFixed("3") +  " / " + steem_power.toFixed("3") + " SP. \n" + lastLevel.toFixed("3") + " VEST to become a WHALES  ``` ")
       message.channel.send({embed});
     }if(checkVest > orca ){
-      embed.setDescription("``` Wow with " + checkVest.toFixed("3") +" or " + steem_power.toFixed("3") + " @" + name + " it's a big whales !! ```");
+      embed.setDescription("```Wow with " + checkVest.toFixed("3") +" VEST or " + steem_power.toFixed("3") + " SP @" + name + " it's a big whales !! ```");
       message.channel.send({embed})
     }
    });
