@@ -8,6 +8,7 @@ var getCreated = require("./actions/created.js");
 var getDiscussion = require("./actions/discussionBFD.js");
 var getRank = require("./actions/ranking.js")
 var getWallet = require("./actions/wallet.js");
+var curationSave = require("/actions/curationSave.js");
 var postVote = require("./actions/upvote.js");
 
 const bot = new Discord.Client();
@@ -48,33 +49,23 @@ module.exports = {
  },
 
  curateArticle : function(message) {
-  thumbnail = "";
-  element = message.content.split("%")
-  link = element.pop();
-  description = element.pop();
-  dataLink = link.split("/");
-  author = dataLink.slice(3,4);
-  author = String(author);
-  embed = new Discord.RichEmbed()
-  embed.setAuthor(author)
-       .setDescription(description)
-       .setColor("#7DDF64")
-
-  fs.readFile('post-saved.json', 'utf8', function readFileCallback(err, data){
-   if (err){
-    console.log(err);
-   } else {
-    obj = JSON.parse(data);
-    obj.nomination.push({id: message.id, description:description, author:author, link:link, thumbnail:thumbnail});
-    json = JSON.stringify(obj);
-    fs.writeFile('post-saved.json', json, 'utf8', cb); // write it back
-  }});
-
-  cb = function(){
-    bot.channels.get(config.curationChan).send({embed});
-    bot.channels.get(config.curationChan).send("\n" + link);
-    message.channel.send("Saved to curation file !");
-  }
+   if(message.channel.id === config.postSubmissioChan){
+       return curationSave.curation(message);
+   }else if(message.channel.id === config.curationChan) {
+    let element = message.content.split("%")                 
+	link = element.pop();
+	description = element.pop();
+	dataLink = link.split("/");
+	author = dataLink.slice(4,5); 
+	author = String(author);
+	  
+    useful = "----------------\n**Author :** " + author + 
+	         "\n----------------\n**Description :** \n\n" + description + "\n\n" + link
+    bot.channels.get(config.curationChan).send(useful)
+    return message.channel.send("Saved to curation channel !");
+   }else{
+    message.channel.send("Please use $curate in #postsubmission !")
+   }
  },
 
  clearMessage : function(message) {
@@ -102,7 +93,6 @@ module.exports = {
 
  checkReaction : function(reaction,user,err) {
   try{
-   console.log(user.message)
    if(reaction.emoji.name === config.checkEmoji) {
     if(user.id === config.voterID) {
      data = reaction.message.embeds[0].url
