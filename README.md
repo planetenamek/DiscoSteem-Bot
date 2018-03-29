@@ -56,9 +56,22 @@ You can now display the Steemit articles of your choice directly on your Discord
 You can specify **a single principalTag** and as **many altTags as you like**. The bot will sort the articles and send them to the channels you specify in the **config.json** file.
 
 ## Install 
+
 You will need a Node JS environment 
 
-- npm install
+### Heroku
+
+If you are using Heroku please read the following content before deploying your project. The **config.json file contains sensitive information**, which you should not put in everyone's hands. Follow the steps to configure your environment variables before continuing with the installation.
+
+https://devcenter.heroku.com/articles/config-vars
+
+### Server administrator
+
+Don't forget the basic safety measures, here is a little reminder.
+
+- https://support.rackspace.com/how-to/linux-server-security-best-practices/
+
+- **npm install**
 
 ## Configuration
 
@@ -88,8 +101,9 @@ You will need a Node JS environment
 
 ## Run 
 
-- node app.js
+If you manage your own server we recommend using pm2
 
+- pm2 start app.js
 
 ## More informations
 
