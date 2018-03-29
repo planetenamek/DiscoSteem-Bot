@@ -40,14 +40,12 @@ module.exports = {
       limit = element.pop()
       tagSearch = String(element.pop())
       author = String(element.shift())
-
   return getDiscussion.discussionBFD("search", author,limit,message);
  },
 
  getWallet : function(message) {
   let account = message.content.split(" ")
       account.shift()
-
   return getWallet.wallet(account,message);
  },
 
@@ -57,21 +55,27 @@ module.exports = {
    }else if(message.channel.id === config.postSubmissionChan) {
     let element = message.content.split("%")                 
 	link = element.pop();
+	link = link.trim();
 	description = element.pop();
 	dataLink = link.split("/");
+	embed = new Discord.RichEmbed();
+	   
         if(link.startsWith("https://busy")) {
 	 author = dataLink.slice(3,4);
-        }else{
+	 author = String(author);
+         embed.setAuthor(author)
+        }else if (link.startsWith("https://steemit") || link.startsWith("https://utopian")){
          author = dataLink.slice(4,5);
-        } 
-	author = String(author);
-	  
-        useful = "----------------\n**Author :** " + author + 
-	         "\n----------------\n**Description :** \n\n" + description + "\n\n" + link
-     bot.channels.get(config.savingSubmissionChan).send(useful)
+	 author = String(author);
+	 embed.setAuthor(author)
+        } else {
+	 message.channel.send("Invalid link please try again !");
+	}
+     embed.setDescription(description + "\n\n" + link)
+     bot.channels.get(config.savingSubmissionChan).send({embed});
      return message.channel.send("Saved to curation channel !");
    }else{
-       message.channel.send("Please use $curate in #postsubmission !")
+     message.channel.send("Please use $curate in #postsubmission !");
    }
  },
 
@@ -86,7 +90,7 @@ module.exports = {
     message.channel.send("Error ! Please try with value > 0 or <= 100");
    }
   }else{
-    message.channel.send("Sorry this command is reserved to admin !")
+    message.channel.send("Sorry this command is reserved to admin !");
   }
  },
 
@@ -94,7 +98,6 @@ module.exports = {
   let name = message.content.split(" ")
       name.shift()
       name = String(name)
-
   return getRank.ranking(name,message);
  },
 
@@ -107,7 +110,6 @@ module.exports = {
       data = data.split("/")
       permlink = data.pop();
       author = data.pop();
-        
       return postVote.upvote(author,permlink);
      }
     }
