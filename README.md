@@ -62,6 +62,8 @@ You will need a Node JS environment
 
 ## Configuration
 
+- mv config-example.json config.json
+
 - Go to the config.json file to add your Discord API application key and configure the ids of your Discord channels.
 
 ```
