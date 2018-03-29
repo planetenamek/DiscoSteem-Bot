@@ -7,17 +7,26 @@ var  bot = new Discord.Client();
 bot.login(config.token);
 
 exports.curation = function(message) {
+ embed = new Discord.RichEmbed()
  element = message.content.split("!")
  link = element.pop();
+ link = link.trim();
  description = element.pop();
  dataLink = link.split("/");
- if(link.startsWith("https://busy")){  author = dataLink.slice(3,4); } else { author = dataLink.slice(4,5) }
-
- author = String(author);
- embed = new Discord.RichEmbed()
  
- embed.setAuthor(author)
-      .setDescription(description + "\n\n" + link)
+ if(link.startsWith("https://busy")){  
+  author = dataLink.slice(3,4);
+  author = String(author);
+  embed.setAuthor(author);
+ }else if (link.startsWith("https://steemit") || link.startsWith("https://utopian")) { 
+  author = dataLink.slice(4,5);
+  author = String(author);
+  embed.setAuthor(author);
+ }else {
+  message.channel.send("Invalid link please try again !");
+ }
+ 
+ embed.setDescription(description + "\n\n" + link)
       .setColor("#7DDF64")
       .setTimestamp()
       .setURL(link)
