@@ -91,4 +91,4 @@ You will need a Node JS environment
 
 ## More informations
 
-https://steemit.com/utopian-io/@planetenamek/discosteem-bot-update-new-features-to-animate-your-discord-server
+https://steemit.com/utopian-io/@planetenamek/discosteem-bot-update-0-2-1-back-up-your-curation-data-upvote-with-reaction-and-more
