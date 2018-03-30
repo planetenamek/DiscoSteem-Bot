@@ -68,7 +68,7 @@ module.exports = {
       author = String(author);
       embed.setAuthor(author)
     }else{
-      message.channel.send("Invalid link please try again !");
+      return message.channel.send("Invalid link please try again !");
     }
      embed.setDescription(description + "\n\n" + link)
      bot.channels.get(config.savingSubmissionChan).send({embed});
