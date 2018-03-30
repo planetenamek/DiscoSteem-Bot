@@ -14,7 +14,6 @@ exports.stream = function() {
  steem.api.streamOperations("irreversible", function(err,result) {
   try{
    if(typeof result != "undefined" && result[0] === "comment" && result[1].parent_author === "") {
-    let dataString = String(result[1].json_metadata);
     let data = JSON.parse(result[1].json_metadata),
         tag = data.tags;
     if(typeof tag != "undefined" ) {
