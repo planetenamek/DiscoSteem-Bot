@@ -8,7 +8,7 @@ bot.login(config.token);
 
 exports.curation = function(message) {
  embed = new Discord.RichEmbed()
- element = message.content.split("!")
+ element = message.content.split("%")
  link = element.pop();
  link = link.trim();
  description = element.pop();
