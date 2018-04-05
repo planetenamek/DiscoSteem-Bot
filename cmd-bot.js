@@ -50,7 +50,7 @@ module.exports = {
  },
 
  curateArticle : function(message) {
-   if(message.channel.id === config.curationChan){
+   if(message.channel.id === config.savingChan){
        return curationSave.curation(message);
    }else if(message.channel.id === config.postSubmissionChan) {
     let element = message.content.split("%")                 
