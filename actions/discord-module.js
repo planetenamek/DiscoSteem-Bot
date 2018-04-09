@@ -183,6 +183,31 @@ module.exports = {
   }else{
    return message.channel.send("Please use $curate in the appropriate channel !");
   }
- } 
+ },
 
+ // Count element from post-saved.json
+ count : function(message) {
+  fs.readFile('post-saved.json', 'utf8', function readFileCallback(err, data){
+   if (err){
+    console.log(err);
+   }else{
+     obj = JSON.parse(data);
+     count = obj.nomination.length;
+    return message.channel.send(count + " posts selected");
+   }
+  });
+ },
+
+ // Clear messages function
+ clear = function(value,message) {
+  if(message.member.permissions.has("ADMINISTRATOR")){
+   if(value > 0 && value <= 100) {
+    message.channel.bulkDelete(value)
+   }else{
+    message.channel.send("Error ! Please try with value > 0 or <= 100");
+   }
+  }else{
+   message.channel.send("Sorry this command is reserved to admin !");
+  }
+ }
 }//End
