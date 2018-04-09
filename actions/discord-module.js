@@ -153,5 +153,36 @@ module.exports = {
   }   
  },
 
- //
+ // Curation data processing 
+ curationAction : function(message) {
+  if(message.channel.id === config.curationChan){
+   return curation(message);
+  }else if(message.channel.id === config.postSubmissionChan) {
+   let element = message.content.split("%")                 
+       link = element.pop();
+       link = link.trim();
+       description = element.pop();
+       dataLink = link.split("/");
+       embed = new Discord.RichEmbed();   
+  
+   if(link.startsWith("https://busy")) {
+     author = dataLink.slice(3,4);
+     author = String(author);
+     embed.setAuthor(author);
+   }else if (link.startsWith("https://steemit") || link.startsWith("https://utopian")){
+     author = dataLink.slice(4,5); 
+     author = String(author);
+     embed.setAuthor(author);
+   }else{
+     return message.channel.send("Invalid link please try again !");
+   }
+  
+   embed.setDescription(description + "\n\n" + link);
+   bot.channels.get(config.savingSubmissionChan).send({embed});
+   return message.channel.send("Saved to curation channel !");
+  }else{
+   return message.channel.send("Please use $curate in the appropriate channel !");
+  }
+ } 
+
 }//End
