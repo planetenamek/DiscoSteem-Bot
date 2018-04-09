@@ -4,7 +4,12 @@
                    "bal" : "**$bal** - Takes as parameter the author of your choice without @ and displays its wallet.",
                    "curatePost" : "**$curate_Description of your post here_Full link to your Steemit post** - Write the command as is and replace the informations.",
                    "search" : "**$search** - Takes as parameter the author of your choice, the tag to target and the number of articles to search. The order returns the items corresponding to the tag selected. (Admin and Mod only)",
-                   "clear" : "**$clear** deletes messages from the channel you are on. **- Ex : $clear 30 -**",
-                   "rank" : "**$rank** Displays the rank of the user of your choice. (minnow, dolphin, orca)"
+                   "clear" : "**$clear** deletes messages from the channel you are on. **- Ex : $clear 30 -** (For admin only)",
+                   "rank" : "**$rank** Displays the rank of the user of your choice. (minnow, dolphin, orca)",
+                   "display-list" : "**$display-list** Displays all items you previously saved in post-saved.json via the $curate function (For curator only)",
+                   "count" : "**$count** Displays the number of items you previously saved in post-saved.json via the $curate function (For curator only)", 
+                   "delete-post" : "**$delete-post** Takes in parameter the ID of the article to be deleted in post-saved.json.(For curator)",
+                   "delete-all" : "**$delete-all** Deletes all content in post-saved.json. (For curator only)",
+                   "more-info" : "**$more-info** Displays a link list with your @ already predefined. ***Example : $more-info planetenamek*** - will display https://steemworld.org/@planetenamek etc..."
                  }
 }          
