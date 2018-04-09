@@ -91,5 +91,67 @@ module.exports = {
   });
  },
  // Delete all content of post-saved.json
+ deleteAll : function(message) {
+  fs.readFile('post-saved.json', 'utf8', function readFileCallback(err, data){
+   if (err){
+    console.log(err);
+   }else{
+    obj = JSON.parse(data);
+    obj.nomination = []
+   }
+   json = JSON.stringify(obj);
+   fs.writeFile('post-saved.json', json, 'utf8', function(){
+    message.channel.send("All posts deleted ! ")
+   });
+  });
+ },
 
+ // Curation function
+ curation : function(message) {
+  embed = new Discord.RichEmbed()
+  date = new Date();
+  element = message.content.split("_")
+  link = element.pop();
+  link = link.trim();
+  description = element.pop();
+  dataLink = link.split("/");
+
+  dateFormated = date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear() + " at " + date.getHours() + ":" + date.getMinutes(); 
+
+  if(link.startsWith("https://busy")){  
+   author = dataLink.slice(3,4);
+   author = String(author);
+   embed.setAuthor(author);
+  }else if (link.startsWith("https://steemit") || link.startsWith("https://utopian")) { 
+   author = dataLink.slice(4,5);
+   author = String(author);
+   embed.setAuthor(author);
+  }else {
+   return message.channel.send("Invalid link please try again !");
+  }
+ 
+  embed.setDescription(description + "\n\n" + link)
+       .setColor("#7DDF64")
+       .setTimestamp()
+       .setURL(link)
+
+  fs.readFile('post-saved.json', 'utf8', function readFileCallback(err, data){
+   if (err){
+    console.log(err);
+   }else{
+    obj = JSON.parse(data);
+    if(typeof obj.nomination[0] === "undefined") { id = 1} else { id = obj.nomination.length + 1 }
+     obj.nomination.push({id: id, author:author, link:link, dateForm: dateFormated, date : date});
+     message.channel.send("Article n° " + obj.nomination.length + " enregistré !");
+     json = JSON.stringify(obj);
+     fs.writeFile('post-saved.json', json, 'utf8', cb); 
+   }
+  });
+
+  cb = function(){
+   bot.channels.get(config.savingChan).send({embed});
+  }   
+ },
+
+ //
 }//End
