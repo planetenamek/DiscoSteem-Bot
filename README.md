@@ -1,4 +1,4 @@
-# DiscoSteem-Bot (0.2.1)
+# DiscoSteem-Bot (0.3.1)
 
 **A Discord bot that interacts with the Steem blockchain API**
 
@@ -6,11 +6,13 @@
 
 ### New implementations
 
-DiscoSteem-Bot now offers an upvote system from your Discord server. To vote for an article you can simply add a reaction,that you have previously defined, to a Steemit/Busy link.
+DiscoSteem-Bot is constantly evolving, in this update we have added several features that we will detail below.
 
-The curate function has been improved to allow data to be stored in a JSON file. This allows simple data reuse and also allows more efficient processing.
-
-> The $curate function now offers two services depending on the channels you have configured.
+- $display-list : With this function you can now display the contents of the file (post-saved.json) containing all the selections of articles made by the curators.
+- $delete-post : With this function you can now delete an element contained in post-saved.json according to its ID. 
+- $delete-all : This function resets the post-saved.json file to zero.
+- $count : This function simply counts the number of articles you have selected and which are in post-saved.json
+- $more-info : This feature will allow you to display a list of links to the most visited sites by Steemians. Of course you can mention an @ and the links will be displayed with your @ in the link, which will allow you to consult directly your information or that of any Steemians.
 
 #### For all users: 
 
