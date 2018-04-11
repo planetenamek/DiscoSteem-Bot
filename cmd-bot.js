@@ -9,7 +9,7 @@ var discordAction = require("./actions/discord-module.js");
 const bot = new Discord.Client();
 
 bot.login(config.token)
-
+// 
 module.exports = { 
  getLastPost : function(message) {
   let element = message.content.split(" ")
@@ -82,9 +82,8 @@ module.exports = {
  },
  
  moreInfo : function(message) {
-  let username = message.content.split(" "),
-      username = username.shift(),
-      username = String(username);
+  let element = message.content.split(" "),
+      username = element.pop();
   return discordAction.moreInfo(username,message);
  },
 
