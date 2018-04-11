@@ -21,7 +21,7 @@ created : function(tag,limit,message) {
   if(limit > 0 && limit <= 100) {    
    steem.api.getDiscussionsByCreated({"tag": tag[0], "limit": limit}, function(err, result) {
     if(result){
-     for (i = 1; i < result.length; i++) {
+     for (i = 0; i < result.length; i++) {
       let author = result[i]["author"],
           permlink = result[i]["permlink"]
       message.channel.send("https://busy.org/" + tag + "/@" + author + "/" + permlink);
@@ -181,7 +181,7 @@ upvote : function(author,permlink) {
 },
 
 // Getthe wallet from user
-wallet = function(account,message) {
+wallet : function(account,message) {
  steem.api.getAccounts(account, function(err, result) {
   if(result.length > 0) {
    let vesting_shares= result["0"].vesting_shares,
