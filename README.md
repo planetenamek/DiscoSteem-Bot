@@ -2,7 +2,7 @@
 
 **A Discord bot that interacts with the Steem blockchain API**
 
-## Release 0.2.1
+## Release 0.3.1
 
 ### New implementations
 
