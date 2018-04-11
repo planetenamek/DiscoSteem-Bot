@@ -4,7 +4,7 @@ const config = require("./../config.json");
 const roleID = config.voterID;
 
 var bot = new Discord.Client();
-var postVote = require("../steem-actions/upvote.js");
+var postVote = require("./steem-module.js");
 
 bot.login(config.token);
 
@@ -30,13 +30,13 @@ module.exports = {
  
  // Returns the display of links for more information
  moreInfo : function(username,message) {
- 	embed = new RichEmbed();
- 	embed.setTitle("List of links")
- 	     .setDescription("For maximum detail https://steemworld.org/@" + username +
- 	     "\n" + "To view all transactions https://steemd.com/@" + username +
- 	     "\n" + "For an overview of your performance and ranking https://steemitboard.com/board.html?user=" + username +
- 	     "\n" + "View incoming votes http://steemreports.com/incoming-votes-info/?account=" + username + "&days=14" +
- 	     "\n" + "View outgoing votes sortants http://steemreports.com/outgoing-votes-info/?account=" + username + "&days=14")
+  embed = new Discord.RichEmbed();
+  embed.setTitle("List of links")
+ 	     .setDescription("**https://steemworld.org/@" + username + "**" +
+ 	     "\n\n" + "**https://steemd.com/@" + username + "**" +
+ 	     "\n\n" + "**https://steemitboard.com/board.html?user=" + username + "**" +
+ 	     "\n\n" + "**http://steemreports.com/incoming-votes-info/?account=" + username + "&days=14**" +
+ 	     "\n\n" + "**http://steemreports.com/outgoing-votes-info/?account=" + username + "&days=14**")
          .setTimestamp()
     return message.channel.send({embed}); 	  
  },
@@ -107,7 +107,7 @@ module.exports = {
  },
 
  // Curation function
- curation : function(message) {
+ curation : function (message) {
   embed = new Discord.RichEmbed()
   date = new Date();
   element = message.content.split("_")
@@ -156,9 +156,9 @@ module.exports = {
  // Curation data processing 
  curationAction : function(message) {
   if(message.channel.id === config.curationChan){
-   return curation(message);
+   return this.curation(message);
   }else if(message.channel.id === config.postSubmissionChan) {
-   let element = message.content.split("%")                 
+   let element = message.content.split("_")                 
        link = element.pop();
        link = link.trim();
        description = element.pop();
@@ -199,7 +199,7 @@ module.exports = {
  },
 
  // Clear messages function
- clear = function(value,message) {
+ clear : function(value,message) {
   if(message.member.permissions.has("ADMINISTRATOR")){
    if(value > 0 && value <= 100) {
     message.channel.bulkDelete(value)
