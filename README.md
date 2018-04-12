@@ -114,4 +114,4 @@ If you manage your own server we recommend using pm2
 
 https://steemit.com/utopian-io/@planetenamek/discosteem-bot-update-0-2-1-back-up-your-curation-data-upvote-with-reaction-and-more
 
-Nous vous rappelons que vous pouvez tester ce bot sur ce serveur --> https://discord.gg/qbqP3
+We remind you that you can test this bot on this server --> https://discord.gg/qbqP3
