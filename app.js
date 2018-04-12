@@ -10,6 +10,7 @@ var cmd = require("./cmd-bot.js");
 bot.on("ready", () => {
  console.log("DiscoSteem-V2 Ready !"); 
  bot.user.setActivity('Stream Steem');
+ streamOp.stream();
  var interval = setInterval (function () {
      bot.destroy() // Restart
     }, 1 * 600000);
@@ -51,6 +52,26 @@ bot.on("message", async message => {
   return cmd.getRanking(message);
  }
 
+ if(command === "display-list") {
+   return cmd.displayList(message);
+ }
+
+ if(command === "count") {
+  return cmd.countList(message);
+ }
+
+ if(command === "delete-post"){
+  return cmd.deletePost(message);
+ }
+
+ if(command === "delete-all") {
+   return cmd.deleteAll(message);
+ }
+
+ if(command === "more-info") {
+  return cmd.moreInfo(message);
+ }
+
  if(command === "help") {
   return cmd.help(message);
  }
@@ -67,21 +88,5 @@ bot.on("disconnect", function() {
   console.log("DiscoSteem-V2 Ready !");
 });
 
+
 bot.login(config.token);
-
-streamOp.stream();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

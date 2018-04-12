@@ -1,5 +1,5 @@
 { 
-  "token"  : "YOUR TOKEN DISCORD",
+  "token"  : "YOUR DISCORD TOKEN",
   "prefix" : "$",
   "altTags" : {"life" : "ID FROM THE CHAN", "blog" : "ID FROM THE CHAN", "photography" : "ID FROM THE CHAN" },
   "principalTag" : "steemit",
@@ -10,8 +10,10 @@
   "savingSubmissionChan" : "ID FROM THE CHAN",
   "maintenance" : "ID FROM THE CHAN",
   "checkEmoji" : "✅",
-  "voterID" : "YOUR USER DISCORD ID",
+  "voterID" : "YOUR DISCORD USER ID",
   "weightVote" : 10000,
   "wif" : "YOUR PRIVATE POSTING KEY",
-  "voter" : "YOUR STEEM USERNAME"
+  "voter" : "YOUR STEEM USERNAME",
+  "trackerVoter" : "@ OF THE ACCOUNT TO BE TRACKED ",
+  "tagTrackerVoter" : "fr"
 }
