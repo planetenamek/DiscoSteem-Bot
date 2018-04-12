@@ -9,7 +9,7 @@ var cmd = require("./cmd-bot.js");
 
 bot.on("ready", () => {
  console.log("DiscoSteem-V2 Ready !"); 
- bot.user.setGame('Stream Steem');
+ bot.user.setActivity('Stream Steem');
  streamOp.stream();
  var interval = setInterval (function () {
      bot.destroy() // Restart
