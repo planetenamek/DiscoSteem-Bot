@@ -13,49 +13,50 @@ DiscoSteem-Bot is constantly evolving, in this update we have added several feat
 - $delete-all : This function resets the post-saved.json file to zero.
 - $count : This function simply counts the number of articles you have selected and which are in post-saved.json
 - $more-info : This feature will allow you to display a list of links to the most visited sites by Steemians. Of course you can mention an @ and the links will be displayed with your @ in the link, which will allow you to consult directly your information or that of any Steemians.
-
-#### For all users: 
-
-Configure in config.json the parameter **postSubmissionChan** all links and descriptions posted on this channel will go directly to the channel you configured with **savingSubmissionChan**.
-
-#### For moderators and curators
-
-Configure in config.json the parameter **curationChan** all links and descriptions posted on this channel will go directly to the channel you have configured with **savingChan**.
-
-In addition to being saved in a different channel, the data will be saved in the file **post-saved.json** which will allow you to process them much more quickly and simply.
-
-**WARNING** : For more consistency think of configuring the permissions of your **curationChan** so that nobody can write there, but simply add reactions. This will allow you to have a very clean channel and therefore a better visibility to view the selected articles.
-
-We have implemented the $rank function to display a Steem user's rank. The function calculates the VEST and returns the rank and number of VEST remaining to reach the next level.
+- We also added a new filter on the StreamOp function, you can now follow the votes of an account on a specific tag. The bot will display a message in a channel that you have defined beforehand, with the different information on the voted article (voting weight, author and post link). To activate this function, simply configure the new parameters in the config.json file (trackerVoter and tagTrackerVoter)
 
 ### Bug fixing
 
-Stream's function was struggling to last over time. We have corrected the major problems and now you can Streamer the Steem blockchain without interruption.
+- The setGame (deprecated ) function has been modified by the setActivity function.
 
-We also added a function allowing the bot to detect its disconnection, which allows us to restart it immediately.
+### About the code
 
-We've added a feature that allows you to delete messages quickly and easily. With the $clear function add the number of messages (max 100) to delete and the bot will clean your Discord channel in a split second.
+Compared to version 0.2.1, we have reviewed the entire code architecture. You will notice in the./actions/ folder that we have added two: 
+
+- discord-module.js
+- steem-module.js
+
+The functions being more and more numerous, we wanted to keep a clear code. You will therefore find in each file the functions specific to each platform (steem, discord). This makes it easier to read and add new functions. 
+
+You will notice in particular that the code in cmd-bot.js is much clearer because we no longer have this gigantic list of "require".
 
 ## Function of the bot
 
 **To make it simple, here is the result of the **$help** command from DiscoSteem-Bot, you will find all the features supported for the moment.**
 
 - **$last-post** followed by the author of your choice, displays the link to the author's latest article.
-- **$created** takes two parameters separated by spaces. the first one is the tag you want to display 
+- **$created** takes two parameters separated by spaces. the first one is the tag you want to display.
 and the second one is the number (min = 1, max = 15) of items to display. 
 ***This option is reserved for the administrator and anyone who has permission to edit a channel.***
-- **search** does an article search based on the parameters you specify. ***- Ex: $search planetenamek fr 30 -*** will search in my last 30 articles and return all articles containing the tag **FR**
+- **$search** does an article search based on the parameters you specify. ***- Ex: $search planetenamek fr 30 -*** will search in my last 30 articles and return all articles containing the tag **FR**.
 - **$bal** displays the wallet of the Steem account of your choice. ***- Ex: $bal planetenamek -*** will display my wallet.
-***Each command ($...) that requires a parameter must be separated by a space***
-- **$curate_Description of your post here_Full Steemit link to your post** saves those information on "curateChan" or on "savingSubmissionChan"
-- **$clear** deletes messages from the channel you are on. **- Ex : $clear 30 -**
-- **$rank** Displays the rank of the user of your choice. (minnow, dolphin, orca)  
+***Each command ($...) that requires a parameter must be separated by a space***.
+- **$curate_Description of your post here_Full Steemit link to your post** saves those information on "curateChan" or on "savingSubmissionChan".
+- **$clear** deletes messages from the channel you are on. **- Ex : $clear 30 -**.
+- **$rank** Displays the rank of the user of your choice. (minnow, dolphin, orca).
+- **$display-post** Displays the contents of the post-saved.json file.
+- **$delete-post** Delete a post present in post-saved.json according to its ID.
+- **$delete-all** Deletes all content in post-saved.json.
+- **$count** Count the number of elements present in post-saved.json
+- **$more-info** Displays a link list containing many related Steem accounts (steemitboard, steemworld etc..) 
 
 ### StreamOperation
 
 You can now display the Steemit articles of your choice directly on your Discord server. Change the settings to suit your needs in the **config.json**.
 
 You can specify **a single principalTag** and as **many altTags as you like**. The bot will sort the articles and send them to the channels you specify in the **config.json** file.
+
+You can also track the votes of the account you use for post steem curation on a specific tag. The bot will display a message on the channel you have chosen. This message will contain the different information about the vote in question.
 
 ## Install 
 
@@ -97,7 +98,9 @@ Don't forget the basic safety measures, here is a little reminder.
   "voterID" : "YOUR USER DISCORD ID",
   "weightVote" : 10000,
   "wif" : "YOUR PRIVATE POSTING KEY",
-  "voter" : "YOUR STEEM USERNAME"
+  "voter" : "YOUR STEEM USERNAME",
+  "trackerVoter" : "@ OF THE ACCOUNT TO BE TRACKED ",
+  "tagTrackerVoter" : "fr"
 }
 ```
 
@@ -110,3 +113,5 @@ If you manage your own server we recommend using pm2
 ## More informations
 
 https://steemit.com/utopian-io/@planetenamek/discosteem-bot-update-0-2-1-back-up-your-curation-data-upvote-with-reaction-and-more
+
+Nous vous rappelons que vous pouvez tester ce bot sur ce serveur --> https://discord.gg/qbqP3
