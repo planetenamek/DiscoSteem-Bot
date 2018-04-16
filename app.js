@@ -10,10 +10,11 @@ var cmd = require("./cmd-bot.js");
 bot.on("ready", () => {
  console.log("DiscoSteem-V2 Ready !"); 
  bot.user.setActivity('Stream Steem');
- bot.setInterval (function () {
-     process.exit(1) // Restart
-    }, 1 * 600000);
- }); 
+}); 
+
+bot.setTimeout (function () {
+ process.exit(1) // Restart
+}, 1 * 1800000);
 
 bot.on("message", async message => {
  const args = message.content.slice(config.prefix.length).trim().split(/ +/g)
