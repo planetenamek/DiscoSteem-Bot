@@ -1,0 +1,10 @@
+{
+    "nodes": [
+        "https://rpc.steemviz.com",
+        "https://api.steemit.com",
+        "https://api.steem.house",
+        "https://rpc.curiesteem.com",
+        "https://steemd.privex.io",
+        "https://gtg.steem.house:8090"
+    ]
+}
