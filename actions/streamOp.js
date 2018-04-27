@@ -40,8 +40,13 @@ function stream() {
                     weight = operation[1].weight / 100;
                 if(voter == config.trackerVoter) {
                     steem.api.getContent(author,permlink, function(err,res) {
-                        let data = JSON.parse(res.json_metadata)
-                            tag = data.tags,
+                        try{
+                            let data = JSON.parse(res.json_metadata)
+                                tag = data.tags,
+                        }catch(err) {
+                            console.log("Error : " + err);
+                            return;
+                        }
                             embed = new Discord.RichEmbed();
                         embed.setTitle("@" + config.trackerVoter + " voted for @" + author)
                              .setDescription("Link : " + "https://busy.org/@" + author + "/"  + permlink)
