@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const steem = require("steem");
+const moment = require("moment");
 const config = require("./../config.json");
 const wif = config.wif;
 const weight = config.weightVote;
@@ -236,5 +237,96 @@ wallet : function(account,message) {
    message.channel.send("User not found !")
   }      
  });      
+},
+
+getInfo: function(username, message) {
+  Promise.all([
+    new Promise(function(resolve, reject) {
+      steem.api.getAccounts([username],function(err, result) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      })
+    }),
+    new Promise(function(resolve, reject) {
+      steem.api.getDynamicGlobalProperties(function(err, result) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      })
+    })
+  ]).then(function(result) {
+    var data = result[0];
+    var globals = result[1];
+    if (data[0] === undefined){
+      message.channel.send(username + ' invalid account :tired_face:');
+    } else {
+      if (data[0].json_metadata) {
+        const profile = JSON.parse(data[0].json_metadata).profile;
+      }
+
+      try{
+        var name = profile.name;
+        var about = profile.about;
+        var location = profile.location;
+      } catch(err){
+        // SOME RPC don't provide the json_metadata field
+        var name = ""
+        var about = null;
+        var location = null;
+      }
+
+      if (name === undefined) {
+        name = username;
+      }
+
+      const reputation = steem.formatter.reputation(data[0].reputation);
+      const vp = data[0].voting_power;
+      const today = moment(Date.now());
+      const created = moment(data[0].created);
+      const diff = today.diff(created, 'days');
+      const lastvote = moment(data[0].last_vote_time).subtract(4,'hours');
+      const totalSteem = Number(globals.total_vesting_fund_steem.split(' ')[0]);
+      const totalVests = Number(globals.total_vesting_shares.split(' ')[0]);
+      const userVests = Number(data[0].vesting_shares.split(' ')[0]);
+      const sp = totalSteem * (userVests / totalVests);
+
+      const witnessesVoted = data[0].witnesses_voted_for;
+      var proxy = null;
+      if (witnessesVoted === 0) {
+        proxy = data[0].proxy;
+      }
+
+      var description = "https://steemit.com/@" + data[0].name + "\n" +
+        "Reputation: " + reputation + "\n";
+
+      if (about !== null && location !== null) {
+        description += "Description: " + about + "\n" +
+          "Location: " + location + "\n";
+      }
+
+      description += "Age: " + diff + " days" + "\n" +
+        "Steem Power: " + sp + " STEEM\n" +
+        "Voting Power: " + vp/100 + "%" + "\n" +
+        "Last vote: " + lastvote.format("YYYY-MM-DD HH.MM") + "\n" +
+        "Account created by: " + data[0].recovery_account + "\n" +
+        "Has voted for " + witnessesVoted + " witnesses\n";
+
+      if (proxy !== null) {
+        description += "Proxy: " + (proxy ? proxy : 'none');
+      }
+
+      const embed = new Discord.RichEmbed()
+        .setAuthor(message.author.username + ' ' + name, message.author.displayAvatarURL)
+        .setColor([77,238,22])
+        .setDescription(description);
+
+      message.channel.send(embed);
+    }
+  });
 }
 }
