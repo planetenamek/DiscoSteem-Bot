@@ -77,6 +77,10 @@ bot.on("message", async message => {
   return cmd.help(message);
  }
 
+ if(command === "info") {
+  return cmd.getInfo(message);
+ }
+
 });
 
 bot.on("messageReactionAdd", (reaction, user) => {

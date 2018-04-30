@@ -42,7 +42,7 @@ function stream() {
                     steem.api.getContent(author,permlink, function(err,res) {
                         try{
                             let data = JSON.parse(res.json_metadata)
-                                tag = data.tags,
+                                tag = data.tags;
                         }catch(err) {
                             console.log("Error : " + err);
                             return;

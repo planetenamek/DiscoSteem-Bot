@@ -101,5 +101,12 @@ module.exports = {
            .setTimestamp()
 
   return message.channel.send({embed});
+ },
+
+ getInfo: function(message) {
+   let element = message.content.split(" "),
+       username = element.pop();
+
+   return steemAction.getInfo(username, message);
  }
 }
