@@ -77,6 +77,7 @@ bot.on("message", async message => {
   return cmd.help(message);
  }
 
+ // Get Steem account info from blockchain
  if(command === "info") {
   return cmd.getInfo(message);
  }

@@ -103,6 +103,7 @@ module.exports = {
   return message.channel.send({embed});
  },
 
+ // Get Steem account info from blockchain
  getInfo: function(message) {
    let element = message.content.split(" "),
        username = element.pop();

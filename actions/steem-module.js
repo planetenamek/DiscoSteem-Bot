@@ -239,9 +239,17 @@ wallet : function(account,message) {
  });      
 },
 
+/**
+ * Retreive Steem account info from the blockchain and renders it on a Discord channel
+ * @param username
+ * @param message
+ */
 getInfo: function(username, message) {
+  // Use promise to wait for two async methods to return their result
   Promise.all([
     new Promise(function(resolve, reject) {
+
+      // Gets a steem account data
       steem.api.getAccounts([username],function(err, result) {
         if (err) {
           reject(err);
@@ -251,6 +259,8 @@ getInfo: function(username, message) {
       })
     }),
     new Promise(function(resolve, reject) {
+
+      // Get needed data to convert VESTS to SP
       steem.api.getDynamicGlobalProperties(function(err, result) {
         if (err) {
           reject(err);
@@ -259,12 +269,15 @@ getInfo: function(username, message) {
         }
       })
     })
-  ]).then(function(result) {
+  ]).then(function(result) { // When all data are returned
     var data = result[0];
     var globals = result[1];
+
+    // Invalid account
     if (data[0] === undefined){
       message.channel.send(username + ' invalid account :tired_face:');
     } else {
+      // Parse the json_metadata that contains full name, location etc...
       if (data[0].json_metadata) {
         const profile = JSON.parse(data[0].json_metadata).profile;
       }
@@ -284,6 +297,7 @@ getInfo: function(username, message) {
         name = username;
       }
 
+      // Build data for rendering
       const reputation = steem.formatter.reputation(data[0].reputation);
       const vp = data[0].voting_power;
       const today = moment(Date.now());
@@ -297,6 +311,8 @@ getInfo: function(username, message) {
 
       const witnessesVoted = data[0].witnesses_voted_for;
       var proxy = null;
+
+      // If the user has not voted for anyone also display if he has use someone as proxy
       if (witnessesVoted === 0) {
         proxy = data[0].proxy;
       }
@@ -304,6 +320,7 @@ getInfo: function(username, message) {
       var description = "https://steemit.com/@" + data[0].name + "\n" +
         "Reputation: " + reputation + "\n";
 
+      // if json_metadata was not available, skip rendering these
       if (about !== null && location !== null) {
         description += "Description: " + about + "\n" +
           "Location: " + location + "\n";
@@ -320,11 +337,13 @@ getInfo: function(username, message) {
         description += "Proxy: " + (proxy ? proxy : 'none');
       }
 
+      // Create a RichEmbed element for the message to be sent to Discord
       const embed = new Discord.RichEmbed()
         .setAuthor(message.author.username + ' ' + name, message.author.displayAvatarURL)
         .setColor([77,238,22])
         .setDescription(description);
 
+      // Send the message back to the channel
       message.channel.send(embed);
     }
   });
