@@ -73,9 +73,7 @@ module.exports = {
         console.log(err);
       } else {
         obj = JSON.parse(data);
-        resultat = obj.nomination.find(nomination = > nomination.id === nb
-      )
-        ;
+        resultat = obj.nomination.find(nomination => nomination.id === nb);
         vl = obj.nomination.indexOf(resultat);
 
         if (typeof obj.nomination[vl] != "undefined") {

@@ -88,22 +88,18 @@ module.exports = {
 
   help: function (message) {
     let embed = new Discord.RichEmbed();
-    // Descriptions command help
+    var description = "-----------------------------------------\n\n";
+
+
+    for (var command in info.infoCmdBot) {
+      if (info.infoCmdBot.hasOwnProperty(command)) {
+        description += info.infoCmdBot[command] + "\n\n";
+      }
+    }
+
     // Descriptions command help
     embed.setTitle("List of the command from the bot")
-      .setDescription("-----------------------------------------\n\n" +
-        info.infoCmdBot["lastPost"] +"\n\n" +
-        info.infoCmdBot["created"] + "\n\n" +
-        info.infoCmdBot["bal"] + "\n\n" +
-        info.infoCmdBot["search"] + "\n\n" +
-        info.infoCmdBot["curatePost"] + "\n\n" +
-        info.infoCmdBot["rank"] + "\n\n" +
-        info.infoCmdBot["display-list"] + "\n\n" +
-        info.infoCmdBot["count"] + "\n\n" +
-        info.infoCmdBot["delete-post"] + "\n\n" +
-        info.infoCmdBot["delete-all"] + "\n\n" +
-        info.infoCmdBot["more-info"] +
-        "\n\n" + info.infoCmdBot["clear"])
+      .setDescription(description)
       .setColor("#7DDF64")
       .setTimestamp();
 
