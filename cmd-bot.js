@@ -8,105 +8,108 @@ var discordAction = require("./actions/discord-module.js");
 
 const bot = new Discord.Client();
 
-bot.login(config.token)
-// 
-module.exports = { 
- getLastPost : function(message) {
-  let element = message.content.split(" ")
-      element.shift()
-      element = String(element)
-  return steemAction.discussionBFD("single-content", element,1,message);
- },
+bot.login(config.token);
 
- getCreatedContent : function(message) {
-  let tag = message.content.split(" ")
-      tag.shift()
-  let limit = tag.pop()
-      limit = parseInt(limit)
-  return steemAction.created(tag,limit,message);
- },
+module.exports = {
+  getLastPost: function (message) {
+    let element = message.content.split(" ")
+    element.shift()
+    element = String(element)
+    return steemAction.discussionBFD("single-content", element, 1, message);
+  },
 
- getSearchContent : function(message) {
-  let element = message.content.split(" ")
-      element.shift()
-      limit = element.pop()
-      tagSearch = String(element.pop())
-      author = String(element.shift())
-  return steemAction.discussionBFD("search", author,limit,message);
- },
+  getCreatedContent: function (message) {
+    let tag = message.content.split(" ")
+    tag.shift()
+    let limit = tag.pop()
+    limit = parseInt(limit)
+    return steemAction.created(tag, limit, message);
+  },
 
- getWallet : function(message) {
-  let account = message.content.split(" ")
-      account.shift()
-  return steemAction.wallet(account,message);
- },
+  getSearchContent: function (message) {
+    let element = message.content.split(" ")
+    element.shift()
+    limit = element.pop()
+    tagSearch = String(element.pop())
+    author = String(element.shift())
+    return steemAction.discussionBFD("search", author, limit, message);
+  },
 
- curateArticle : function(message) {
-  return discordAction.curationAction(message);
- },
+  getWallet: function (message) {
+    let account = message.content.split(" ")
+    account.shift()
+    return steemAction.wallet(account, message);
+  },
 
- clearMessage : function(message) {
-  let value = message.content.split(" ")
-      value = value.pop()
-  return discordAction.clear(value,message);
- },
+  curateArticle: function (message) {
+    return discordAction.curationAction(message);
+  },
 
- getRanking : function(message) {
-  let name = message.content.split(" ")
-      name.shift()
-      name = String(name)
-  return steemAction.ranking(name,message);
- },
+  clearMessage: function (message) {
+    let value = message.content.split(" ")
+    value = value.pop()
+    return discordAction.clear(value, message);
+  },
 
- checkReaction : function(reaction,user,err) {
-  return discordAction.reaction(reaction,user,err);
- },
+  getRanking: function (message) {
+    let name = message.content.split(" ")
+    name.shift()
+    name = String(name)
+    return steemAction.ranking(name, message);
+  },
 
- deletePost : function(message) {
-  let value = message.content.split(" ");
-      nb = value.pop();
-      nb = parseInt(nb);
-  return discordAction.deletePost(nb,message);
- },
+  checkReaction: function (reaction, user, err) {
+    return discordAction.reaction(reaction, user, err);
+  },
 
- displayList : function(message) {
-  return discordAction.display(message);
- },
+  deletePost: function (message) {
+    let value = message.content.split(" ");
+    nb = value.pop();
+    nb = parseInt(nb);
+    return discordAction.deletePost(nb, message);
+  },
 
- countList : function(message) {
-  return discordAction.count(message);
- },
+  displayList: function (message) {
+    return discordAction.display(message);
+  },
 
- deleteAll : function(message) {
-  return discordAction.deleteAll(message);
- },
- 
- moreInfo : function(message) {
-  let element = message.content.split(" "),
-      username = element.pop();
-  return discordAction.moreInfo(username,message);
- },
+  countList: function (message) {
+    return discordAction.count(message);
+  },
 
- help : function(message) {
-  let embed = new Discord.RichEmbed();
-      // Descriptions command help
-      embed.setTitle("List of the command from the bot")  
-           .setDescription("-----------------------------------------\n\n" +
-              info.infoCmdBot["lastPost"] +"\n\n" + info.infoCmdBot["created"] + "\n\n" +
-              info.infoCmdBot["bal"] + "\n\n" + info.infoCmdBot["search"] + "\n\n" + info.infoCmdBot["curatePost"] + "\n\n" +
-              info.infoCmdBot["rank"] + "\n\n" + info.infoCmdBot["display-list"] + "\n\n" + info.infoCmdBot["count"] + "\n\n" + 
-              info.infoCmdBot["delete-post"] + "\n\n" + info.infoCmdBot["delete-all"] + "\n\n" + info.infoCmdBot["more-info"] +
-              "\n\n" + info.infoCmdBot["clear"])
-           .setColor("#7DDF64")
-           .setTimestamp()
+  deleteAll: function (message) {
+    return discordAction.deleteAll(message);
+  },
 
-  return message.channel.send({embed});
- },
+  moreInfo: function (message) {
+    let element = message.content.split(" "), username = element.pop();
+    return discordAction.moreInfo(username, message);
+  },
 
- getInfo: function(message) {
-   let element = message.content.split(" "),
-       username = element.pop();
+  help: function (message) {
+    let embed = new Discord.RichEmbed();
+    var description = "-----------------------------------------\n\n";
 
-   return steemAction.getInfo(username, message);
- }
-}
+
+    for (var command in info.infoCmdBot) {
+      if (info.infoCmdBot.hasOwnProperty(command)) {
+        description += info.infoCmdBot[command] + "\n\n";
+      }
+    }
+
+    // Descriptions command help
+    embed.setTitle("List of the command from the bot")
+      .setDescription(description)
+      .setColor("#7DDF64")
+      .setTimestamp();
+
+    return message.channel.send({embed});
+  },
+
+  // Get Steem account info from blockchain
+  getInfo: function (message) {
+    let element = message.content.split(" "), username = element.pop();
+
+    return steemAction.getInfo(username, message);
+  }
+};
