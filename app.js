@@ -19,72 +19,59 @@ bot.setTimeout (function () {
 
 bot.on("message", async message =>
 {
-  const args = message.content.slice(config.prefix.length).trim().split(/ +/g)
-  const command = args.shift().toLowerCase()
+  const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
+  const command = args.shift().toLowerCase();
 
-  if (message.author.bot) {
-    return
+  if (message.author.bot || message.content.indexOf(config.prefix) !== 0) {
+    return;
   }
 
-  if (message.content.indexOf(config.prefix) !== 0) {
-    return
-  }
+  switch(command) {
+    case "created":
+      return cmd.getCreatedContent(message);
 
-  if (command === "created") {
-    return cmd.getCreatedContent(message);
-  }
+    case "last-post":
+      return cmd.getLastPost(message);
 
-  if (command === "last-post") {
-    return cmd.getLastPost(message);
-  }
+    case "search":
+      return cmd.getSearchContent(message);
 
-  if (command === "search") {
-    return cmd.getSearchContent(message);
-  }
+    case "bal":
+      return cmd.getWallet(message);
 
-  if (command === "bal") {
-    return cmd.getWallet(message);
-  }
+    case "clear":
+      return cmd.clearMessage(message);
 
-  if (command.startsWith("curate")) {
-    return cmd.curateArticle(message);
-  }
+    case "rank":
+      return cmd.getRanking(message);
 
-  if (command === "clear") {
-    return cmd.clearMessage(message);
-  }
+    case "display-list":
+      return cmd.displayList(message);
 
-  if (command === "rank") {
-    return cmd.getRanking(message);
-  }
+    case "count":
+      return cmd.countList(message);
 
-  if (command === "display-list") {
-    return cmd.displayList(message);
-  }
+    case "delete-post":
+      return cmd.deletePost(message);
 
-  if (command === "count") {
-    return cmd.countList(message);
-  }
+    case "delete-all":
+      return cmd.deleteAll(message);
 
-  if (command === "delete-post") {
-    return cmd.deletePost(message);
-  }
+    case "more-info":
+      return cmd.moreInfo(message);
 
-  if (command === "delete-all") {
-    return cmd.deleteAll(message);
-  }
+    case "help":
+      return cmd.help(message);
 
-  if (command === "more-info") {
-    return cmd.moreInfo(message);
-  }
+    case "info": // Get Steem account info from blockchain
+      return cmd.getInfo(message);
 
-  if (command === "help") {
-    return cmd.help(message);
-  }
+    default:
+      if (command.startsWith("curate")) {
+        return cmd.curateArticle(message);
+      }
 
-  // Get Steem account info from blockchain
-  if (command === "info") {
-    return cmd.getInfo(message);
+      console.log('Unknown command');
   }
 });
 
