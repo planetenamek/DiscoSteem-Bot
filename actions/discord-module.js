@@ -81,7 +81,7 @@ module.exports = {
           json = JSON.stringify(obj);
 
           fs.writeFile('post-saved.json', json, 'utf8', function () {
-            return message.channel.send("Article n° " + nb + " supprimé !");
+            return message.channel.send("Article #" + nb + " deleted !");
           });
 
         } else {
@@ -143,7 +143,7 @@ module.exports = {
         obj = JSON.parse(data);
         if (typeof obj.nomination[0] === "undefined") { id = 1} else { id = obj.nomination.length + 1 }
         obj.nomination.push({id: id, author: author, link: link, dateForm: dateFormated, date: date});
-        message.channel.send("Article n° " + obj.nomination.length + " enregistré !");
+        message.channel.send("Article #" + obj.nomination.length + " saved !");
         json = JSON.stringify(obj);
         fs.writeFile('post-saved.json', json, 'utf8', cb);
       }

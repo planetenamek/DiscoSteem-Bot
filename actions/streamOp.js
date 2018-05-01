@@ -49,11 +49,13 @@ function stream() {
               console.log("Error : " + err);
               return;
             }
+
             embed = new Discord.RichEmbed();
             embed.setTitle("@" + config.trackerVoter + " voted for @" + author)
               .setDescription("Link : " + "https://busy.org/@" + author + "/" + permlink)
               .setFooter("Weight vote : " + weight + "%")
-              .setTimestamp()
+              .setTimestamp();
+
             if (typeof tag != "undefined" && tag.indexOf(config.tagTrackerVoter) != (-1)) {
               bot.channels.get(config.maintenance).send({embed});
             }
