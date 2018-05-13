@@ -55,7 +55,7 @@ module.exports = {
           embed.setAuthor(author + " (" + reputation + ")",)
             .setTitle(result.title)
             .setColor(0x00AE86)
-            .setFooter("Catégorie : " + tag[0])
+            .setFooter("Category : " + tag[0])
             .setTimestamp()
             .setURL("https://busy.org" + result.url);
 
