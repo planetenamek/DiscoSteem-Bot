@@ -21,19 +21,24 @@ function stream() {
 
       // Check all posts published on the steem blockchain
       if (operation[0] == "comment" && operation[1].parent_author == "") {
-        let data = JSON.parse(operation[1].json_metadata),
-          tag = data.tags;
-        if (typeof tag != "undefined") {
-          if (tag.indexOf(config.principalTag) != (-1)) {
-            let author = operation[1].author,
-              permlink = operation[1].permlink;
-            for (v in config.altTags) {
-              if (tag.indexOf(v) != (-1)) {
-                content.getContent(author, permlink, config.altTags[v]);
+        try {
+          let data = JSON.parse(operation[1].json_metadata),
+            tag = data.tags;
+          if (typeof tag != "undefined") {
+            if (tag.indexOf(config.principalTag) != (-1)) {
+              let author = operation[1].author,
+                permlink = operation[1].permlink;
+              for (v in config.altTags) {
+                if (tag.indexOf(v) != (-1)) {
+                  content.getContent(author, permlink, config.altTags[v]);
+                }
               }
+              content.getContent(author, permlink, config.principalChan);
             }
-            content.getContent(author, permlink, config.principalChan);
           }
+        } catch (err) {
+          console.log("Error : " + err);
+          return;
         }
       } else if (operation[0] == "vote") {  // Check all votes from steem blockchain
         let voter = operation[1].voter,
@@ -49,13 +54,18 @@ function stream() {
               console.log("Error : " + err);
               return;
             }
+
             embed = new Discord.RichEmbed();
             embed.setTitle("@" + config.trackerVoter + " voted for @" + author)
               .setDescription("Link : " + "https://busy.org/@" + author + "/" + permlink)
               .setFooter("Weight vote : " + weight + "%")
-              .setTimestamp()
+              .setTimestamp();
+
             if (typeof tag != "undefined" && tag.indexOf(config.tagTrackerVoter) != (-1)) {
-              bot.channels.get(config.maintenance).send({embed});
+              let channel = bot.channels.get(config.maintenance);
+              if(channel) {
+                channel.send({embed});
+              }
             }
           });
         }

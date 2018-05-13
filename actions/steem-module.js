@@ -55,7 +55,7 @@ module.exports = {
           embed.setAuthor(author + " (" + reputation + ")",)
             .setTitle(result.title)
             .setColor(0x00AE86)
-            .setFooter("Catégorie : " + tag[0])
+            .setFooter("Category : " + tag[0])
             .setTimestamp()
             .setURL("https://busy.org" + result.url);
 
@@ -251,107 +251,87 @@ module.exports = {
    * @param message
    */
   getInfo: function (username, message) {
-    // Use promise to wait for two async methods to return their result
-    Promise.all([
-      new Promise(function (resolve, reject) {
+    (async function () {
+      try {
+        let data = await steem.api.getAccountsAsync([username]);
+        let globals = await steem.api.getDynamicGlobalPropertiesAsync();
 
-        // Gets a steem account data
-        steem.api.getAccounts([username], function (err, result) {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(result);
+        // Invalid account
+        if (data[0] === undefined) {
+          message.channel.send(username + ' invalid account :tired_face:');
+        } else {
+          // Parse the json_metadata that contains full name, location etc...
+          if (data[0].json_metadata) {
+            const profile = JSON.parse(data[0].json_metadata).profile;
           }
-        })
-      }),
-      new Promise(function (resolve, reject) {
 
-        // Get needed data to convert VESTS to SP
-        steem.api.getDynamicGlobalProperties(function (err, result) {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(result);
+          try {
+            var name = profile.name;
+            var about = profile.about;
+            var location = profile.location;
+          } catch (err) {
+            // SOME RPC don't provide the json_metadata field
+            var name = ""
+            var about = null;
+            var location = null;
           }
-        })
-      })
-    ]).then(function (result) { // When all data are returned
-      var data = result[0];
-      var globals = result[1];
 
-      // Invalid account
-      if (data[0] === undefined) {
-        message.channel.send(username + ' invalid account :tired_face:');
-      } else {
-        // Parse the json_metadata that contains full name, location etc...
-        if (data[0].json_metadata) {
-          const profile = JSON.parse(data[0].json_metadata).profile;
+          if (name === undefined) {
+            name = username;
+          }
+
+          // Build data for rendering
+          const reputation = steem.formatter.reputation(data[0].reputation);
+          const vp = data[0].voting_power;
+          const today = moment(Date.now());
+          const created = moment(data[0].created);
+          const diff = today.diff(created, 'days');
+          const lastvote = moment(data[0].last_vote_time).subtract(4, 'hours');
+          const totalSteem = Number(globals.total_vesting_fund_steem.split(' ')[0]);
+          const totalVests = Number(globals.total_vesting_shares.split(' ')[0]);
+          const userVests = Number(data[0].vesting_shares.split(' ')[0]);
+          const sp = totalSteem * (userVests / totalVests);
+
+          const witnessesVoted = data[0].witnesses_voted_for;
+          var proxy = null;
+
+          // If the user has not voted for anyone also display if he has use someone as proxy
+          if (witnessesVoted === 0) {
+            proxy = data[0].proxy;
+          }
+
+          var description = "https://steemit.com/@" + data[0].name + "\n" +
+            "Reputation: " + reputation + "\n";
+
+          // if json_metadata was not available, skip rendering these
+          if (about !== null && location !== null) {
+            description += "Description: " + about + "\n" +
+              "Location: " + location + "\n";
+          }
+
+          description += "Age: " + diff + " days" + "\n" +
+            "Steem Power: " + sp + " STEEM\n" +
+            "Voting Power: " + vp / 100 + "%" + "\n" +
+            "Last vote: " + lastvote.format("YYYY-MM-DD HH.MM") + "\n" +
+            "Account created by: " + data[0].recovery_account + "\n" +
+            "Has voted for " + witnessesVoted + " witnesses\n";
+
+          if (proxy !== null) {
+            description += "Proxy: " + (proxy ? proxy : 'none');
+          }
+
+          // Create a RichEmbed element for the message to be sent to Discord
+          const embed = new Discord.RichEmbed()
+            .setAuthor(message.author.username + ' ' + name, message.author.displayAvatarURL)
+            .setColor([77, 238, 22])
+            .setDescription(description);
+
+          // Send the message back to the channel
+          message.channel.send(embed);
         }
-
-        try {
-          var name = profile.name;
-          var about = profile.about;
-          var location = profile.location;
-        } catch (err) {
-          // SOME RPC don't provide the json_metadata field
-          var name = ""
-          var about = null;
-          var location = null;
-        }
-
-        if (name === undefined) {
-          name = username;
-        }
-
-        // Build data for rendering
-        const reputation = steem.formatter.reputation(data[0].reputation);
-        const vp = data[0].voting_power;
-        const today = moment(Date.now());
-        const created = moment(data[0].created);
-        const diff = today.diff(created, 'days');
-        const lastvote = moment(data[0].last_vote_time).subtract(4, 'hours');
-        const totalSteem = Number(globals.total_vesting_fund_steem.split(' ')[0]);
-        const totalVests = Number(globals.total_vesting_shares.split(' ')[0]);
-        const userVests = Number(data[0].vesting_shares.split(' ')[0]);
-        const sp = totalSteem * (userVests / totalVests);
-
-        const witnessesVoted = data[0].witnesses_voted_for;
-        var proxy = null;
-
-        // If the user has not voted for anyone also display if he has use someone as proxy
-        if (witnessesVoted === 0) {
-          proxy = data[0].proxy;
-        }
-
-        var description = "https://steemit.com/@" + data[0].name + "\n" +
-          "Reputation: " + reputation + "\n";
-
-        // if json_metadata was not available, skip rendering these
-        if (about !== null && location !== null) {
-          description += "Description: " + about + "\n" +
-            "Location: " + location + "\n";
-        }
-
-        description += "Age: " + diff + " days" + "\n" +
-          "Steem Power: " + sp + " STEEM\n" +
-          "Voting Power: " + vp / 100 + "%" + "\n" +
-          "Last vote: " + lastvote.format("YYYY-MM-DD HH.MM") + "\n" +
-          "Account created by: " + data[0].recovery_account + "\n" +
-          "Has voted for " + witnessesVoted + " witnesses\n";
-
-        if (proxy !== null) {
-          description += "Proxy: " + (proxy ? proxy : 'none');
-        }
-
-        // Create a RichEmbed element for the message to be sent to Discord
-        const embed = new Discord.RichEmbed()
-          .setAuthor(message.author.username + ' ' + name, message.author.displayAvatarURL)
-          .setColor([77, 238, 22])
-          .setDescription(description);
-
-        // Send the message back to the channel
-        message.channel.send(embed);
+      } catch (err) {
+        console.log("[error][getsteemprofile]", err);
       }
-    });
+    })();
   }
 }
