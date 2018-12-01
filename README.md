@@ -117,4 +117,6 @@ If you manage your own server we recommend using pm2
 ### [0.1.0](https://steemit.com/utopian-io/@planetenamek/discosteem-bot-update-new-features-to-animate-your-discord-server)
 ### [0.0.1](https://steemit.com/utopian-io/@planetenamek/construction-from-new-steem-discord-bot-discosteem-bot)
 
-**We remind you that you can test this bot on this server --> https://discord.gg/qbqP3**
+
+## Informations 
+ - Join me on --> https://discord.gg/CcNs5uP
